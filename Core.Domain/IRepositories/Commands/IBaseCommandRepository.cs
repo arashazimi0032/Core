@@ -1,10 +1,9 @@
 ﻿using Core.Domain.BaseModels;
 
-namespace Core.Domain.IRepositories;
+namespace Core.Domain.IRepositories.Commands;
 
-public interface IBaseCommandRepository<TEntity, TId>
-    where TEntity : Entity<TId>
-    where TId : notnull
+public interface IBaseCommandRepository<TEntity>
+    where TEntity : Entity
 {
     Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task AddRangeAsync(params TEntity[] entities);

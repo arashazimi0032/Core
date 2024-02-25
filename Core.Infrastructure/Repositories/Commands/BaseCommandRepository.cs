@@ -1,13 +1,12 @@
 ﻿using Core.Domain.BaseModels;
-using Core.Domain.IRepositories;
+using Core.Domain.IRepositories.Commands;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Repositories.Commands;
 
-public abstract class BaseCommandRepository<TContext, TEntity, TId> : IBaseCommandRepository<TEntity, TId>
+public abstract class BaseCommandRepository<TContext, TEntity> : IBaseCommandRepository<TEntity>
     where TContext : DbContext
-    where TEntity : Entity<TId>
-    where TId : notnull
+    where TEntity : Entity
 {
     private readonly TContext _context;
     protected DbSet<TEntity> dbSet;
