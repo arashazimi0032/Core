@@ -4,7 +4,32 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>CleanTemplate</PackageId>
+    <Title>CleanTemplate</Title>
+    <Version>1.0.0</Version>
+    <Authors>arashazimi0032</Authors>
+    <Product>CleanTemplate</Product>
+    <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
+    <PackageIcon>CleanTemplate.png</PackageIcon>
+    <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
+    <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
+    <PackageReleaseNotes>- Base Repositories Based on CQRS Pattern,
+- Base UnitOfWork Pattern
+- Base DbContext,
+- Base Entity/ ValueObject/ AggregateRoot,
+- Base Auditing For Entities
+- Base Domain Event, 
+- Base MediatR Request and RequestHandlers</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\arash\OneDrive\Desktop\CleanTemplate.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
