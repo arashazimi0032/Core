@@ -8,6 +8,9 @@ public interface IBaseCommandRepository<TEntity>
     Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task AddRangeAsync(params TEntity[] entities);
     Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
+    TEntity Add(TEntity entity);
+    void AddRange(params TEntity[] entities);
+    void AddRange(IEnumerable<TEntity> entities);
     TEntity Update(TEntity entity);
     void UpdateRange(params TEntity[] entity);
     void UpdateRange(IEnumerable<TEntity> entity);

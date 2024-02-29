@@ -17,9 +17,24 @@ public abstract class BaseCommandRepository<TContext, TEntity> : IBaseCommandRep
         dbSet = _context.Set<TEntity>();
     }
 
+    public TEntity Add(TEntity entity)
+    {
+        return dbSet.Add(entity).Entity;
+    }
+
     public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         return (await dbSet.AddAsync(entity, cancellationToken)).Entity;
+    }
+
+    public void AddRange(params TEntity[] entities)
+    {
+        dbSet.AddRange(entities);
+    }
+
+    public void AddRange(IEnumerable<TEntity> entities)
+    {
+        dbSet.AddRange(entities);
     }
 
     public async Task AddRangeAsync(params TEntity[] entities)
