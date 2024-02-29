@@ -14,7 +14,8 @@
     <PackageIcon>CleanTemplate.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Base Repositories Based on CQRS Pattern,
+    <PackageReleaseNotes>---------- version 1.0.0 ---------- 
+- Base Repositories Based on CQRS Pattern,
 - Base UnitOfWork Pattern
 - Base DbContext,
 - Base Entity/ ValueObject/ AggregateRoot,
@@ -22,6 +23,7 @@
 - Base Domain Event, 
 - Base MediatR Request and RequestHandlers</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
+    <PackAsTool>False</PackAsTool>
   </PropertyGroup>
 
   <ItemGroup>
