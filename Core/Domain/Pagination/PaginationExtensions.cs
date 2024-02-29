@@ -6,7 +6,7 @@ public static class PaginationExtensions
     {
         return await PaginatedList<T>.CreateAsync(source, page, cancellationToken);
     }
-    public static PaginatedList<T> ToPaginatedListAsync<T>(this IEnumerable<T> source, Page page)
+    public static PaginatedList<T> ToPaginatedList<T>(this IEnumerable<T> source, Page page)
     {
         return PaginatedList<T>.Create(source, page);
     }

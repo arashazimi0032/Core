@@ -1,6 +1,8 @@
 ﻿using Core.Domain.BaseModels;
 using Core.Domain.IRepositories.Queries;
+using Core.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Core.Infrastructure.Repositories.Queries;
 
@@ -20,26 +22,6 @@ public class BaseQueryRepositry<TContext, TEntity, TId> : IBaseQueryRepository<T
         dbSetAsNoTrack = _context.Set<TEntity>().AsNoTracking();
     }
 
-    public IEnumerable<TEntity> GetAll()
-    {
-        return dbSetAsNoTrack.ToList();
-    }
-
-    public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
-    {
-        return await dbSetAsNoTrack.ToListAsync(cancellationToken);
-    }
-
-    public TEntity? GetById(TId id)
-    {
-        var entity = dbSet.Find(id);
-
-        if (entity is null) return null;
-
-        _context.Entry(entity).State = EntityState.Detached;
-        return entity;
-    }
-
     public async Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
     {
         var entity = await dbSet.FindAsync(id, cancellationToken);
@@ -49,14 +31,61 @@ public class BaseQueryRepositry<TContext, TEntity, TId> : IBaseQueryRepository<T
         _context.Entry(entity).State = EntityState.Detached;
         return entity;
     }
-
-    public async Task<IQueryable<TEntity>> GetQueryableAsNoTrackAsync(CancellationToken cancellationToken = default)
+    public TEntity? GetById(TId id)
     {
-        return dbSetAsNoTrack;
-    }
+        var entity = dbSet.Find(id);
 
-    public async Task<IQueryable<TEntity>> GetQueryableAsync(CancellationToken cancellationToken = default)
+        if (entity is null) return null;
+
+        _context.Entry(entity).State = EntityState.Detached;
+        return entity;
+    }
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await dbSetAsNoTrack.FirstOrDefaultAsync(predicate);
+    }
+    public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
+    {
+        return dbSetAsNoTrack.FirstOrDefault(predicate);
+    }
+    public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await dbSetAsNoTrack.ToListAsync(cancellationToken);
+    }
+    public IEnumerable<TEntity> GetAll()
+    {
+        return dbSetAsNoTrack.ToList();
+    }
+    public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        return await dbSetAsNoTrack.Where(predicate).ToListAsync(cancellationToken);
+    }
+    public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+    {
+        return dbSetAsNoTrack.Where(predicate).ToList();
+    }
+    public async Task<PaginatedList<TEntity>> GetPaginatedAsync(Page page, CancellationToken cancellationToken = default)
+    {
+        return await dbSetAsNoTrack.ToPaginatedListAsync(page, cancellationToken);
+    }
+    public PaginatedList<TEntity> GetPaginated(Page page)
+    {
+        return dbSetAsNoTrack.ToPaginatedList(page);
+    }
+    public async Task<PaginatedList<TEntity>> GetPaginatedAsync(Expression<Func<TEntity, bool>> predicate, Page page, CancellationToken cancellationToken = default)
+    {
+        return await dbSetAsNoTrack.Where(predicate).ToPaginatedListAsync(page, cancellationToken);
+    }
+    public PaginatedList<TEntity> GetPaginated(Expression<Func<TEntity, bool>> predicate, Page page)
+    {
+        return dbSetAsNoTrack.Where(predicate).ToPaginatedList(page);
+    }
+    public IQueryable<TEntity> GetQueryable()
     {
         return dbSet;
+    }
+    public IQueryable<TEntity> GetQueryableAsNoTrack()
+    {
+        return dbSetAsNoTrack;
     }
 }
