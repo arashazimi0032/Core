@@ -20,9 +20,24 @@ public class BaseQueryRepositry<TContext, TEntity, TId> : IBaseQueryRepository<T
         dbSetAsNoTrack = _context.Set<TEntity>().AsNoTracking();
     }
 
+    public IEnumerable<TEntity> GetAll()
+    {
+        return dbSetAsNoTrack.ToList();
+    }
+
     public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await dbSetAsNoTrack.ToListAsync(cancellationToken);
+    }
+
+    public TEntity? GetById(TId id)
+    {
+        var entity = dbSet.Find(id);
+
+        if (entity is null) return null;
+
+        _context.Entry(entity).State = EntityState.Detached;
+        return entity;
     }
 
     public async Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
