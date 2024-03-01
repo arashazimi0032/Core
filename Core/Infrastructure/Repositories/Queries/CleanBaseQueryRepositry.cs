@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Core.Infrastructure.Repositories.Queries;
 
-public class CleanBaseQueryRepositry<TContext, TEntity, TId> : ICleanBaseQueryRepository<TEntity, TId>
+public abstract class CleanBaseQueryRepositry<TContext, TEntity, TId> : ICleanBaseQueryRepository<TEntity, TId>
     where TContext : DbContext
     where TEntity : CleanBaseEntity<TId>
     where TId : notnull
