@@ -1,1 +1,1 @@
-# Core
+Clean Architecture Base Template
