@@ -2,6 +2,6 @@
 
 namespace Core.Domain.BaseEvents;
 
-public interface IBaseDomainEvent : INotification
+public interface ICleanBaseDomainEvent : INotification
 {
 }

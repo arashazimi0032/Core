@@ -3,17 +3,17 @@ using Core.Domain.Primitives;
 
 namespace Core.Domain.BaseModels;
 
-public class Entity : IHasDomainEvent, IAuditable
+public abstract class CleanEntity : ICleanHasDomainEvent, ICleanAuditable
 {
-    private readonly List<IBaseDomainEvent> _domainEvents = new();
-    public IReadOnlyList<IBaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+    private readonly List<ICleanBaseDomainEvent> _domainEvents = new();
+    public IReadOnlyList<ICleanBaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();
     }
-    public void Raise(IBaseDomainEvent domainEvent)
+    public void Raise(ICleanBaseDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }

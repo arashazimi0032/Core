@@ -6,16 +6,16 @@ using System.Linq.Expressions;
 
 namespace Core.Infrastructure.Repositories.Queries;
 
-public class BaseQueryRepositry<TContext, TEntity, TId> : IBaseQueryRepository<TEntity, TId>
+public class CleanBaseQueryRepositry<TContext, TEntity, TId> : ICleanBaseQueryRepository<TEntity, TId>
     where TContext : DbContext
-    where TEntity : BaseEntity<TId>
+    where TEntity : CleanBaseEntity<TId>
     where TId : notnull
 {
     private readonly TContext _context;
     protected DbSet<TEntity> dbSet;
     protected IQueryable<TEntity> dbSetAsNoTrack;
 
-    protected BaseQueryRepositry(TContext context)
+    protected CleanBaseQueryRepositry(TContext context)
     {
         _context = context;
         dbSet = _context.Set<TEntity>();
@@ -64,19 +64,19 @@ public class BaseQueryRepositry<TContext, TEntity, TId> : IBaseQueryRepository<T
     {
         return dbSetAsNoTrack.Where(predicate).ToList();
     }
-    public async Task<PaginatedList<TEntity>> GetPaginatedAsync(Page page, CancellationToken cancellationToken = default)
+    public async Task<CleanPaginatedList<TEntity>> GetPaginatedAsync(CleanPage page, CancellationToken cancellationToken = default)
     {
         return await dbSetAsNoTrack.ToPaginatedListAsync(page, cancellationToken);
     }
-    public PaginatedList<TEntity> GetPaginated(Page page)
+    public CleanPaginatedList<TEntity> GetPaginated(CleanPage page)
     {
         return dbSetAsNoTrack.ToPaginatedList(page);
     }
-    public async Task<PaginatedList<TEntity>> GetPaginatedAsync(Expression<Func<TEntity, bool>> predicate, Page page, CancellationToken cancellationToken = default)
+    public async Task<CleanPaginatedList<TEntity>> GetPaginatedAsync(Expression<Func<TEntity, bool>> predicate, CleanPage page, CancellationToken cancellationToken = default)
     {
         return await dbSetAsNoTrack.Where(predicate).ToPaginatedListAsync(page, cancellationToken);
     }
-    public PaginatedList<TEntity> GetPaginated(Expression<Func<TEntity, bool>> predicate, Page page)
+    public CleanPaginatedList<TEntity> GetPaginated(Expression<Func<TEntity, bool>> predicate, CleanPage page)
     {
         return dbSetAsNoTrack.Where(predicate).ToPaginatedList(page);
     }

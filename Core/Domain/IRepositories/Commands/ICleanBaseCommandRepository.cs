@@ -2,8 +2,8 @@
 
 namespace Core.Domain.IRepositories.Commands;
 
-public interface IBaseCommandRepository<TEntity>
-    where TEntity : Entity
+public interface ICleanBaseCommandRepository<TEntity>
+    where TEntity : CleanEntity
 {
     Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
     Task AddRangeAsync(params TEntity[] entities);

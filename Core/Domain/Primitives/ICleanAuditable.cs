@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain.Primitives;
 
-public interface IAuditable
+public interface ICleanAuditable
 {
     DateTime CreatedAt { get; set; }
     DateTime? ModifiedAt { get; set; }

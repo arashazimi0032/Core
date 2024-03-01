@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Context;
 
-public abstract class BaseIdentityDbContext<TContext, TUser> : IdentityDbContext<TUser>
+public abstract class CleanBaseIdentityDbContext<TContext, TUser> : IdentityDbContext<TUser>
     where TContext : IdentityDbContext<TUser>
     where TUser : IdentityUser
 {
-    protected BaseIdentityDbContext(DbContextOptions<TContext> options) : base(options)
+    protected CleanBaseIdentityDbContext(DbContextOptions<TContext> options) : base(options)
     {
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var entries = ChangeTracker.Entries<IAuditable>();
+        var entries = ChangeTracker.Entries<ICleanAuditable>();
 
         foreach (var entry in entries)
         {

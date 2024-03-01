@@ -1,5 +1,5 @@
 ﻿namespace Core.Domain.IRepositories.UnitOfWork;
 
-public interface IBaseQueryUnitOfWork
+public interface ICleanBaseQueryUnitOfWork
 {
 }

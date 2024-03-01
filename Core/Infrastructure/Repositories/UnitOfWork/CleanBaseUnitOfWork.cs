@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Repositories.UnitOfWork;
 
-public abstract class BaseUnitOfWork<TContext, TCommand, TQuery>
+public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery>
     where TContext : DbContext
-    where TCommand : IBaseCommandUnitOfWork
-    where TQuery : IBaseQueryUnitOfWork
+    where TCommand : ICleanBaseCommandUnitOfWork
+    where TQuery : ICleanBaseQueryUnitOfWork
 {
     private readonly TContext _context;
-    protected BaseUnitOfWork(TContext context)
+    protected CleanBaseUnitOfWork(TContext context)
     {
         _context = context;
         Commands = CreateCommandInstance(context);

@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Repositories.Commands;
 
-public abstract class BaseCommandRepository<TContext, TEntity> : IBaseCommandRepository<TEntity>
+public abstract class CleanBaseCommandRepository<TContext, TEntity> : ICleanBaseCommandRepository<TEntity>
     where TContext : DbContext
-    where TEntity : Entity
+    where TEntity : CleanEntity
 {
     private readonly TContext _context;
     protected DbSet<TEntity> dbSet;
 
-    protected BaseCommandRepository(TContext context)
+    protected CleanBaseCommandRepository(TContext context)
     {
         _context = context;
         dbSet = _context.Set<TEntity>();

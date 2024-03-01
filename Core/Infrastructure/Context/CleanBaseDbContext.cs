@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Context;
 
-public abstract class BaseDbContext<TContext> : DbContext
+public abstract class CleanBaseDbContext<TContext> : DbContext
     where TContext : DbContext
 {
-    protected BaseDbContext(DbContextOptions<TContext> options) : base(options)
+    protected CleanBaseDbContext(DbContextOptions<TContext> options) : base(options)
     {
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var entries = ChangeTracker.Entries<IAuditable>();
+        var entries = ChangeTracker.Entries<ICleanAuditable>();
 
         foreach (var entry in entries)
         {

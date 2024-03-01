@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Repositories.UnitOfWork;
 
-public abstract class BaseCommandUnitOfWork<TContext> : IBaseCommandUnitOfWork
+public abstract class CleanBaseQueryUnitOfWork<TContext> : ICleanBaseQueryUnitOfWork
     where TContext : DbContext
 {
     private readonly TContext _context;
-    protected BaseCommandUnitOfWork(TContext context)
+    protected CleanBaseQueryUnitOfWork(TContext context)
     {
         _context = context;
     }
