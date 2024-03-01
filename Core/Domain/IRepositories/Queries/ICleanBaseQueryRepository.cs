@@ -10,7 +10,7 @@ public interface ICleanBaseQueryRepository<TEntity, TId>
 {
     Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
     TEntity? GetById(TId id);
-    Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate);
+    Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     TEntity? Get(Expression<Func<TEntity, bool>> predicate);
     Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
     IEnumerable<TEntity> GetAll();

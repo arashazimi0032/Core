@@ -40,9 +40,9 @@ public abstract class CleanBaseQueryRepositry<TContext, TEntity, TId> : ICleanBa
         _context.Entry(entity).State = EntityState.Detached;
         return entity;
     }
-    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        return await dbSetAsNoTrack.FirstOrDefaultAsync(predicate);
+        return await dbSetAsNoTrack.FirstOrDefaultAsync(predicate, cancellationToken);
     }
     public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
     {
