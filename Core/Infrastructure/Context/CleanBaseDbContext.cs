@@ -1,9 +1,10 @@
-﻿using Core.Domain.Primitives;
+﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.Primitives;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Context;
 
-public abstract class CleanBaseDbContext<TContext> : DbContext
+public abstract class CleanBaseDbContext<TContext> : DbContext, ICleanBaseIgnore
     where TContext : DbContext
 {
     protected CleanBaseDbContext(DbContextOptions<TContext> options) : base(options)

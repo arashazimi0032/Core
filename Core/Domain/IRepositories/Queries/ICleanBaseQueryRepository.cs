@@ -1,10 +1,11 @@
-﻿using Core.Domain.BaseModels;
+﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.BaseModels;
 using Core.Domain.Pagination;
 using System.Linq.Expressions;
 
 namespace Core.Domain.IRepositories.Queries;
 
-public interface ICleanBaseQueryRepository<TEntity, TId>
+public interface ICleanBaseQueryRepository<TEntity, TId> : ICleanBaseIgnore
     where TEntity : CleanBaseEntity<TId>
     where TId : notnull
 {

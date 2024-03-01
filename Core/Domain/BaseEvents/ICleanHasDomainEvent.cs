@@ -1,6 +1,8 @@
-﻿namespace Core.Domain.BaseEvents;
+﻿using Core.Application.ServiceLifeTimes;
 
-public interface ICleanHasDomainEvent
+namespace Core.Domain.BaseEvents;
+
+public interface ICleanHasDomainEvent : ICleanBaseIgnore
 {
     public IReadOnlyList<ICleanBaseDomainEvent> DomainEvents { get; }
     public void ClearDomainEvents();

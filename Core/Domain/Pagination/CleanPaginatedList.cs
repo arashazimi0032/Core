@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Application.ServiceLifeTimes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Pagination;
 
-public class CleanPaginatedList<T> : List<T>
+public class CleanPaginatedList<T> : List<T>, ICleanBaseIgnore
 {
     private CleanPaginatedList(CleanPage page, long totalCount)
     {

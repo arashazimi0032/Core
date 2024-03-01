@@ -1,11 +1,12 @@
-﻿using Core.Domain.Primitives;
+﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.Primitives;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Context;
 
-public abstract class CleanBaseIdentityDbContext<TContext, TUser> : IdentityDbContext<TUser>
+public abstract class CleanBaseIdentityDbContext<TContext, TUser> : IdentityDbContext<TUser>, ICleanBaseIgnore
     where TContext : IdentityDbContext<TUser>
     where TUser : IdentityUser
 {

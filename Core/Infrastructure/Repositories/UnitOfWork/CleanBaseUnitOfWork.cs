@@ -1,9 +1,10 @@
-﻿using Core.Domain.IRepositories.UnitOfWork;
+﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.IRepositories.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Infrastructure.Repositories.UnitOfWork;
 
-public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery>
+public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery> : ICleanBaseScoped
     where TContext : DbContext
     where TCommand : ICleanBaseCommandUnitOfWork
     where TQuery : ICleanBaseQueryUnitOfWork

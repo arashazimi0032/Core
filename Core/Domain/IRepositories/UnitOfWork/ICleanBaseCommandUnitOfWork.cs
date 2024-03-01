@@ -1,5 +1,7 @@
-﻿namespace Core.Domain.IRepositories.UnitOfWork;
+﻿using Core.Application.ServiceLifeTimes;
 
-public interface ICleanBaseCommandUnitOfWork
+namespace Core.Domain.IRepositories.UnitOfWork;
+
+public interface ICleanBaseCommandUnitOfWork : ICleanBaseIgnore
 {
 }

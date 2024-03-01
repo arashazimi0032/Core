@@ -1,8 +1,9 @@
-﻿using Core.Domain.BaseModels;
+﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.BaseModels;
 
 namespace Core.Domain.IRepositories.Commands;
 
-public interface ICleanBaseCommandRepository<TEntity>
+public interface ICleanBaseCommandRepository<TEntity> : ICleanBaseIgnore
     where TEntity : CleanEntity
 {
     Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
