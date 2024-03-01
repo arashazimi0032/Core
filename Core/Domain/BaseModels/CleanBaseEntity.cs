@@ -3,7 +3,7 @@
 public abstract class CleanBaseEntity<TId> : CleanEntity, IEquatable<CleanBaseEntity<TId>>
     where TId : notnull
 {
-    public TId Id { get; protected set; }
+    public TId Id { get; set; }
     public bool Equals(CleanBaseEntity<TId>? other)
     {
         return Equals((object?)other);
