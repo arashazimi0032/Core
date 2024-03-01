@@ -1,4 +1,5 @@
 ﻿using Core.Domain.BaseModels;
+using Core.Domain.Extensions.Pagination;
 using Core.Domain.IRepositories.Queries;
 using Core.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;

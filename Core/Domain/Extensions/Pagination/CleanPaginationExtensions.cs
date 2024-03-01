@@ -1,4 +1,6 @@
-﻿namespace Core.Domain.Pagination;
+﻿using Core.Domain.Pagination;
+
+namespace Core.Domain.Extensions.Pagination;
 
 public static class CleanPaginationExtensions
 {
