@@ -1,7 +1,4 @@
-﻿using Core.Domain.BaseEvents;
-using Core.Domain.Primitives;
-
-namespace Core.Domain.BaseModels;
+﻿namespace Core.Domain.BaseModels;
 
 public abstract class CleanBaseEntity<TId> : CleanEntity, IEquatable<CleanBaseEntity<TId>>
     where TId : notnull
