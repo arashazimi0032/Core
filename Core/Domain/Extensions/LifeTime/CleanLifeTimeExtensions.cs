@@ -110,13 +110,37 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(IAsyncDisposable)) &&
             !i.Equals(typeof(IEnumerable)) &&
             !i.IsAssignableTo(typeof(IEnumerable)) &&
-            !i.Equals(typeof(IAsyncEnumerable<>)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IAsyncEnumerable<>))) &&
             !i.Equals(typeof(IEnumerator)) &&
-            !i.Equals(typeof(IEquatable<>)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IEnumerator<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IAsyncEnumerator<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IEquatable<>))) &&
             !i.Equals(typeof(IComparable)) &&
-            !i.Equals(typeof(IComparable<>)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IComparable<>))) &&
             !i.Equals(typeof(IFormattable)) &&
-            !i.Equals(typeof(ICloneable)));
+            !i.Equals(typeof(ISpanFormattable)) &&
+            !i.Equals(typeof(IUtf8SpanFormattable)) &&
+            !i.Equals(typeof(IComparer)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IComparer<>))) &&
+            !i.Equals(typeof(IConvertible)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IObservable<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IObserver<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IParsable<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(ISpanParsable<>))) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IUtf8SpanParsable<>))) &&
+            !i.Equals(typeof(IQueryProvider)) &&
+            !i.Equals(typeof(IServiceProvider)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IServiceProviderFactory<>))) &&
+            !i.Equals(typeof(IServiceScope)) &&
+            !i.Equals(typeof(IServiceScopeFactory)) &&
+            !i.Equals(typeof(IStructuralComparable)) &&
+            !i.Equals(typeof(IStructuralEquatable)) &&
+            !i.Equals(typeof(ISupportRequiredService)) &&
+            !i.Equals(typeof(IThreadPoolWorkItem)) &&
+            !i.Equals(typeof(ITimer)) &&
+            !i.Equals(typeof(IAsyncResult)) &&            
+            !i.Equals(typeof(ICloneable))
+            );
     }
 
     #endregion
