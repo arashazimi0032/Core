@@ -26,13 +26,14 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Pack
-      run: dotnet pack --configuration Release --output ./Package
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package
 
     - name: Find latest .nupkg file
       id: find-package
       run: |
-        latest_package=$(ls -t ${{ github.workspace }}\Package\*.nupkg | head -n 1)
-        echo "::set-output name=latest_package::$latest_package"
+        $latestPackage = Get-ChildItem -Path "${{ github.workspace }}\Package" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Output "Latest package: $latestPackage"
+        Write-Output "::set-output name=latest_package::$latestPackage"
 
     - name: Publish NuGet package
       run: dotnet nuget push ${{ steps.find-package.outputs.latest_package }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
