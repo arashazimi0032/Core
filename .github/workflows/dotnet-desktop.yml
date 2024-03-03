@@ -1,0 +1,32 @@
+name: Build and Deploy NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Pack
+      run: dotnet pack --configuration Release
+
+    - name: Publish NuGet package
+      run: dotnet nuget push bin/Release/*.nupkg --api-key oy2nrk34umgrrbgct65qt3hvce37rleelkcos6g3ccu6ru --source https://api.nuget.org/v3/index.json
