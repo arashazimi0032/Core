@@ -26,7 +26,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Pack
-      run: dotnet pack --configuration Release
+      run: dotnet pack --configuration Release --output ./Package
 
     - name: Publish NuGet package
-      run: dotnet nuget push bin/Release/*.nupkg --api-key oy2nrk34umgrrbgct65qt3hvce37rleelkcos6g3ccu6ru --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./Package/*.nupkg --api-key oy2nrk34umgrrbgct65qt3hvce37rleelkcos6g3ccu6ru --source https://api.nuget.org/v3/index.json
