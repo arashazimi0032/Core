@@ -28,5 +28,11 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release --output ./Package
 
+    - name: Find latest .nupkg file
+      id: find-package
+      run: |
+        latest_package=$(ls -t ${{ github.workspace }}\Package\*.nupkg | head -n 1)
+        echo "::set-output name=latest_package::$latest_package"
+
     - name: Publish NuGet package
-      run: dotnet nuget push ${{ github.workspace }}\Package\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ${{ steps.find-package.outputs.latest_package }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
