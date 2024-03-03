@@ -1,17 +1,18 @@
-﻿using Core.Application.ServiceLifeTimes;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Core.Domain.Pagination;
 
-public class CleanPaginatedList<T> : List<T>, ICleanBaseIgnore
+public class CleanPaginatedList<T>
 {
-    private CleanPaginatedList(CleanPage page, long totalCount)
+    private CleanPaginatedList(List<T> items, CleanPage page, long totalCount)
     {
+        Items = items;
         Page = page;
         TotalCount = totalCount;
         TotalPages = (int)Math.Ceiling(TotalCount / (double)Page.Size);
     }
 
+    public List<T> Items { get; set; }
     public CleanPage Page { get; set; } = new CleanPage();
     public long TotalCount { get; set; }
     public int TotalPages { get; set; }
@@ -21,30 +22,24 @@ public class CleanPaginatedList<T> : List<T>, ICleanBaseIgnore
     public static async Task<CleanPaginatedList<T>> CreateAsync(IQueryable<T> source, CleanPage page, CancellationToken cancellationToken = default)
     {
         var totalCount = await source.CountAsync();
-        var data = source
+        var items = await source
             .Skip((page.Number - 1) * page.Size)
-            .Take(page.Size);
+            .Take(page.Size)
+            .ToListAsync(cancellationToken);
 
-        var paginatedList = new CleanPaginatedList<T>(page, totalCount);
-        await foreach(T item in data.AsAsyncEnumerable().WithCancellation(cancellationToken))
-        {
-            paginatedList.Add(item);
-        }
+        var paginatedList = new CleanPaginatedList<T>(items, page, totalCount);
         return paginatedList;
     }
 
     public static CleanPaginatedList<T> Create(IEnumerable<T> source, CleanPage page)
     {
         var totalCount = source.Count();
-        var data = source
+        var items = source
             .Skip((page.Number - 1) * page.Size)
-            .Take(page.Size);
+            .Take(page.Size)
+            .ToList();
 
-        var paginatedList = new CleanPaginatedList<T>(page, totalCount);
-        foreach(var item in data)
-        {
-            paginatedList.Add(item);
-        }
+        var paginatedList = new CleanPaginatedList<T>(items, page, totalCount);
         return paginatedList;
     }
 }
