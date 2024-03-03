@@ -79,7 +79,7 @@ internal static class CleanLifeTimeExtensions
             }
             else
             {
-                if (type.IsAssignableTo(typeof(CleanBaseUnitOfWork<,,>)))
+                if (type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(CleanBaseUnitOfWork<,,>))
                 {
                     services.AddScoped(type);
                 }
