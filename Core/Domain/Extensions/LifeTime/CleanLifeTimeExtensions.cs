@@ -1,6 +1,7 @@
 ﻿using Core.Application.ServiceLifeTimes;
 using Core.Infrastructure.Repositories.UnitOfWork;
-using Microsoft.Data.SqlClient;
+using Core.Presentation.Middleware;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
 using System.Reflection;
@@ -9,7 +10,6 @@ namespace Core.Domain.Extensions.LifeTime;
 
 internal static class CleanLifeTimeExtensions
 {
-    #region Helper
     internal static IServiceCollection AddLifeTimeServices(this IServiceCollection services, Assembly assembly)
     {
         services
@@ -30,9 +30,19 @@ internal static class CleanLifeTimeExtensions
         foreach (Type type in types)
         {
             IEnumerable<Type> interfaces = GetImplementedInterfaces(type);
-            foreach (Type interfaceType in interfaces)
+            if (interfaces.Any())
             {
-                services.AddTransient(interfaceType, type);
+                foreach (Type interfaceType in interfaces)
+                {
+                    services.AddTransient(interfaceType, type);
+                } 
+            }
+            else
+            {
+                if (type.IsAssignableTo(typeof(ICleanBaseMiddleware)))
+                {
+                    services.AddTransient(type);
+                }
             }
         }
 
@@ -139,9 +149,8 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(IThreadPoolWorkItem)) &&
             !i.Equals(typeof(ITimer)) &&
             !i.Equals(typeof(IAsyncResult)) &&            
-            !i.Equals(typeof(ICloneable))
+            !i.Equals(typeof(ICloneable)) &&
+            !i.Equals(typeof(IMiddleware))
             );
     }
-
-    #endregion
 }
