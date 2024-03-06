@@ -1,15 +1,15 @@
 ﻿namespace Core.Domain.Results;
 
-public class Result<TValue> : Result
+public class CleanResult<TValue> : CleanResult
 {
 
     private readonly TValue _value;
-    protected internal Result(TValue value, bool isSuccess, Error error) : base(isSuccess, error)
+    protected internal CleanResult(TValue value, bool isSuccess, CleanError error) : base(isSuccess, error)
     {
         _value = value;
     }
 
-    public static implicit operator Result<TValue>(TValue value) => Success(value);
+    public static implicit operator CleanResult<TValue>(TValue value) => Success(value);
 
     public TValue Value => IsSuccess
         ? _value
