@@ -3,7 +3,7 @@ using Core.Domain.Primitives;
 
 namespace Core.Domain.BaseModels;
 
-public abstract class CleanEntity : ICleanHasDomainEvent, ICleanAuditable
+public abstract class CleanEntity : ICleanBaseHasDomainEvent, ICleanAuditable
 {
     private readonly List<ICleanBaseDomainEvent> _domainEvents = new();
     public IReadOnlyList<ICleanBaseDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
