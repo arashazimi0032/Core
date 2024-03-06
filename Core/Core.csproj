@@ -7,17 +7,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>3.2.0</Version>
+    <Version>3.2.1</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Automatically Domain Events Publishing handled in override of SaveChangesAsync Method. (Domain Events firstly should Add to model using Raise method of BaseEntity)
-- Result Class Renamed to CleanResult
-- ICleanBaseMiddleware added for base of middlewares.
-- app.UseCleanTemplate added for register all ApplicationBuilder Middlewares.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Bug Fix in Automatic dependency Injection</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>

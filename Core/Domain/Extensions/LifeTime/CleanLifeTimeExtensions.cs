@@ -116,6 +116,7 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(ICleanBaseSingleton)) &&
             !i.Equals(typeof(ICleanBaseTransient)) &&
             !i.Equals(typeof(ICleanBaseIgnore)) &&
+            !i.Equals(typeof(ICleanBaseMiddleware)) &&
             !i.Equals(typeof(IDisposable)) &&
             !i.Equals(typeof(IAsyncDisposable)) &&
             !i.Equals(typeof(IEnumerable)) &&
