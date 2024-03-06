@@ -2,7 +2,7 @@
 
 namespace Core.Domain.Extensions.Results;
 
-public static class ResultExtensions
+public static class CleanResultExtensions
 {
     public static CleanResult<T> Ensure<T>(this CleanResult<T> result, Func<T, bool> predicate, CleanError error)
     {
