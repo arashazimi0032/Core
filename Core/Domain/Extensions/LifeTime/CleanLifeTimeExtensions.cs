@@ -1,6 +1,7 @@
 ﻿using Core.Application.ServiceLifeTimes;
 using Core.Infrastructure.Repositories.UnitOfWork;
 using Core.Presentation.Middleware;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections;
@@ -151,7 +152,8 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(ITimer)) &&
             !i.Equals(typeof(IAsyncResult)) &&            
             !i.Equals(typeof(ICloneable)) &&
-            !i.Equals(typeof(IMiddleware))
+            !i.Equals(typeof(IMiddleware)) &&
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IPipelineBehavior<,>)))
             );
     }
 }

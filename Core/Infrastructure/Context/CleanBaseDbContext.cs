@@ -3,6 +3,7 @@ using Core.Domain.BaseEvents;
 using Core.Domain.Primitives;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Core.Infrastructure.Context;
 
@@ -26,7 +27,8 @@ public abstract class CleanBaseDbContext<TContext> : DbContext, ICleanBaseIgnore
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .Ignore<List<ICleanBaseDomainEvent>>();
+            .Ignore<List<ICleanBaseDomainEvent>>()
+            .ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
 
         base.OnModelCreating(modelBuilder);
     }

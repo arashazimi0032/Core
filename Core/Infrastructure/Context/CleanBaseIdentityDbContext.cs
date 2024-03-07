@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Core.Infrastructure.Context;
 
@@ -29,7 +30,8 @@ public abstract class CleanBaseIdentityDbContext<TContext, TUser> : IdentityDbCo
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .Ignore<List<ICleanBaseDomainEvent>>();
+            .Ignore<List<ICleanBaseDomainEvent>>()
+            .ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
 
         base.OnModelCreating(modelBuilder);
     }
