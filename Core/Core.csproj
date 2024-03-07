@@ -7,14 +7,17 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>3.2.1</Version>
+    <Version>4.0.0</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Bug Fix in Automatic dependency Injection</PackageReleaseNotes>
+    <PackageReleaseNotes>- ICleanBaseEntityConfiguration added for configing entity tables in code-first manner.
+- ICleanBaseMinimalApi added for Handling MinimalAPIs
+- MapCleanTemplate added as extension for IEndpointRouteBuilder for mapping Minimal APIs
+- Code Refactor and Bug Fix</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -32,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Carter" Version="8.0.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />

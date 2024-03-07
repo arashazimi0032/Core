@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Core.Domain.Extensions.Middleware;
 
-public static class CleanApplicationExtensions
+internal static class CleanApplicationExtensions
 {
     internal static IApplicationBuilder UseCleanMiddlewares(this IApplicationBuilder app, Assembly assembly)
     {
