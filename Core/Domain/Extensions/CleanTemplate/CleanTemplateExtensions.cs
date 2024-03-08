@@ -1,7 +1,7 @@
-﻿using Core.Domain.Extensions.LifeTime;
+﻿using Core.Domain.Extensions.Endpoint;
+using Core.Domain.Extensions.LifeTime;
 using Core.Domain.Extensions.MediatR;
 using Core.Domain.Extensions.Middleware;
-using Core.Domain.Extensions.MinimalApi;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +16,6 @@ public static class CleanTemplateExtensions
         var assembly = Assembly.GetCallingAssembly();
 
         services.AddCleanMediatR(assembly);
-        services.AddCleanMinimalApi();
 
         services
             .AddLifeTimeServices(assembly);
@@ -28,15 +27,12 @@ public static class CleanTemplateExtensions
     {
         var assembly = Assembly.GetCallingAssembly();
 
+        app.UseRouting();
+
         app.UseCleanMiddlewares(assembly);
 
+        app.UseCleanEndpoints(assembly);
+
         return app;
-    }
-
-    public static IEndpointRouteBuilder MapCleanTemplate(this IEndpointRouteBuilder builder)
-    {
-        builder.MapCleanMinimalApi();
-
-        return builder;
     }
 }
