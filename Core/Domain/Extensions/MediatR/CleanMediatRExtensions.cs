@@ -9,7 +9,7 @@ internal static class CleanMediatRExtensions
     {
         services.AddMediatR(configuration =>
         {
-            configuration.RegisterServicesFromAssemblies(assembly);
+            configuration.RegisterServicesFromAssembly(assembly);
         });
         
         return services;
