@@ -28,7 +28,7 @@ public abstract class CleanBaseDbContext<TContext> : DbContext, ICleanBaseIgnore
     {
         modelBuilder
             .Ignore<List<ICleanBaseDomainEvent>>()
-            .ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
+            .ApplyConfigurationsFromAssembly(typeof(TContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
     }
