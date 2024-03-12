@@ -234,16 +234,6 @@ public class UnitOfWork : CleanBaseUnitOfWork<ApplicationDbContext, CommandUnitO
     public UnitOfWork(ApplicationDbContext context) : base(context)
     {
     }
-
-    protected override CommandUnitOfWork CreateCommandInstance(ApplicationDbContext context)
-    {
-        return new CommandUnitOfWork(context);
-    }
-
-    protected override QueryUnitOfWork CreateQueryInstance(ApplicationDbContext context)
-    {
-        return new QueryUnitOfWork(context);
-    }
 }
 ```
 

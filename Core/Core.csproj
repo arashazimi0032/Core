@@ -7,16 +7,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>4.1.0</Version>
+    <Version>4.1.1</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- ICleanBaseMinimalApi Renamed to ICleanBaseEndPoint
-- MapCleanTemplate Extension removed. just use of UseCleanTemplate for minimal APIs (Endpoints).
-- Bug Fix in ICleanBaseEntityConfiguration for Add-Migration.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Refactor code for CleanBaseUnitOfWork. (no longer need to Implement Abstract methods for Create Instance from Command and Query UnitOfWorks).</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>

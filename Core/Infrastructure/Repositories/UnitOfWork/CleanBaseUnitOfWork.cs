@@ -1,6 +1,7 @@
 ﻿using Core.Application.ServiceLifeTimes;
 using Core.Domain.IRepositories.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Core.Infrastructure.Repositories.UnitOfWork;
 
@@ -13,13 +14,12 @@ public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery> : ICleanBa
     protected CleanBaseUnitOfWork(TContext context)
     {
         _context = context;
-        Commands = CreateCommandInstance(context);
-        Queries = CreateQueryInstance(context);
+
+        Commands = CreateInstance<TCommand>();
+        Queries = CreateInstance<TQuery>();  
     }
     public TCommand Commands { get; protected set; }
     public TQuery Queries { get; protected set; }
-    protected abstract TCommand CreateCommandInstance(TContext context);
-    protected abstract TQuery CreateQueryInstance(TContext context);
 
     public DbContext GetDbContext()
     {
@@ -30,4 +30,12 @@ public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery> : ICleanBa
     {
         return await _context.SaveChangesAsync(cancellationToken) > 0;
     }
+
+    #region Private
+    private TType CreateInstance<TType>()
+    {
+        ConstructorInfo commandConstructor = typeof(TType).GetConstructor(new Type[] { typeof(TContext) })!;
+        return (TType)commandConstructor!.Invoke(new object[] { _context });
+    }
+    #endregion
 }
