@@ -6,7 +6,7 @@ This package provides you with all the necessary prerequisites to start a .Net p
 
 The .Net version used in this project is net8.0
 
-[![CleanTemplate](icon.png)](https://www.nuget.org/packages/CleanTemplate#readme-body-tab)
+[![CleanTemplate](https://github.com/arashazimi0032/Core/blob/master/icon.png)](https://www.nuget.org/packages/CleanTemplate#readme-body-tab)
 
 ## Dependencies
 
