@@ -211,7 +211,6 @@ public class CommandUnitOfWork : CleanBaseCommandUnitOfWork<ApplicationDbContext
 {
     public CommandUnitOfWork(ApplicationDbContext context) : base(context)
     {
-        Products = new ProductCommandRepository(context);
     }
 
     public IProductCommandRepository Products {  get; private set; }
@@ -221,7 +220,6 @@ public class QueryUnitOfWork : CleanBaseQueryUnitOfWork<ApplicationDbContext>, I
 {
     public QueryUnitOfWork(ApplicationDbContext context) : base(context)
     {
-        Products = new ProductQueryRepository(context);
     }
 
     public IProductQueryRepository Products { get; private set; }
