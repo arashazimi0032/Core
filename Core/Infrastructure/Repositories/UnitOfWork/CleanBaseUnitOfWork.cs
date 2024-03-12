@@ -34,8 +34,7 @@ public abstract class CleanBaseUnitOfWork<TContext, TCommand, TQuery> : ICleanBa
     #region Private
     private TType CreateInstance<TType>()
     {
-        ConstructorInfo commandConstructor = typeof(TType).GetConstructor(new Type[] { typeof(TContext) })!;
-        return (TType)commandConstructor!.Invoke(new object[] { _context });
+        return (TType)typeof(TType).GetConstructor(new Type[1] { typeof(TContext) })!.Invoke(new object[1] { _context });
     }
     #endregion
 }
