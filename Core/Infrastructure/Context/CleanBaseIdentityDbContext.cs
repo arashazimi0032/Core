@@ -31,7 +31,7 @@ public abstract class CleanBaseIdentityDbContext<TContext, TUser> : IdentityDbCo
     {
         modelBuilder
             .Ignore<List<ICleanBaseDomainEvent>>()
-            .ApplyConfigurationsFromAssembly(Assembly.GetCallingAssembly());
+            .ApplyConfigurationsFromAssembly(typeof(TContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
     }

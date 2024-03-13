@@ -1,9 +1,7 @@
-﻿using Core.Domain.Extensions.Endpoint;
-using Core.Domain.Extensions.LifeTime;
-using Core.Domain.Extensions.MediatR;
+﻿using Core.Domain.DependencyInjectionModules;
+using Core.Domain.Extensions.Endpoint;
 using Core.Domain.Extensions.Middleware;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -11,14 +9,20 @@ namespace Core.Domain.Extensions.CleanTemplate;
 
 public static class CleanTemplateExtensions
 {
+    public static IServiceCollection AddDependencyInjection<TDIModule>(this IServiceCollection services)
+        where TDIModule : CleanBaseDependencyInjectionModule
+    {
+        var assembly = typeof(TDIModule).Assembly;
+
+        services.AddCleanTemplate(assembly);
+
+        return services;
+    }
     public static IServiceCollection AddCleanTemplate(this IServiceCollection services)
     {
         var assembly = Assembly.GetCallingAssembly();
 
-        services.AddCleanMediatR(assembly);
-
-        services
-            .AddLifeTimeServices(assembly);
+        services.AddCleanTemplate(assembly);
 
         return services;
     }
