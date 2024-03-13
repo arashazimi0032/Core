@@ -54,7 +54,7 @@ Cake
 
 I tryed to use CleanBase Prefix for all Base types in CleanTemplate Package so you can easily find them.
 
-#### Dependency Injection And Service Configurations/ Registerations
+#### Dependency Injection And Service Configurations / Registerations
 
 CleanTemplate Package has two Extension Method for configuring and registering all the types that are introduced in the rest of this tutorial.
 
@@ -105,6 +105,24 @@ The above service automatically registerd as below (you don't need to write the 
 ```csharp
 builder.Services.AddTransient<IService, Service>();
 ```
+
+#### Dependency Injection And Service Configurations / Registerations From another Assembly
+
+If you have **Assemblies** other than the Web API Assembly in your solution (for example, several *ClassLibraries* to which the Web API has reference), and you have services in these Assemblies that you want to be Registered as a LifeTime service, ``AddCleanTemplate`` cannot Register them from Assemblies other than Web API. Therefore, you must Register those Assemblies in the following way:
+
+1- Install CleanTemplate Package inside that Assembly.
+2- Create a DIModule inside that Assembly.
+
+```csharp
+public class MyAssemblyNameDIModule : CleanBaseDependencyInjectionModule
+{
+}
+```
+3- Add this DIModule to Registration Flow inside Web API Program.cs After AddCleanTemplate().
+```csharp
+builder.Services.AddDependencyInjection<MyAssemblyNameDIModule>();
+```
+Now all the services inside this assembly are injected as a LifetTme Service. (Any type of LifeTime service that you set according to the rules of the LifeTime Service Registeration mentioned above).
 
 #### Create Model
 
