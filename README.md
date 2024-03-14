@@ -461,6 +461,8 @@ public class TestSetting : CleanBaseSetting
 }
 ```
 
+Then you just need to inject this TestSetting Class inside your services to access to its Properties.
+
 #### Middlewares
 
 ``ICleanBaseMiddleware`` implemented for automatically handling Middlewares in CleanTemplate.
