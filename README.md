@@ -419,7 +419,45 @@ We also implemented ``ToPaginatedListAsync(CleanPage Page)`` and ``ToPaginatedLi
 ```csharp
 public class TestException : CleanBaseException<ExceptionStatusCode>
 {
-    public override ExceptionStatusCode ExceptionCode => ExceptionStatusCode.CoreResource;
+    public override ExceptionStatusCode ExceptionType => ExceptionStatusCode.CoreResource;
+}
+public enum ExceptionStatusCode
+{
+    CoreResource
+}
+```
+
+#### Settings
+
+``CleanBaseSetting`` class added for reading and configuring settings from appsettings.json.
+Make sure that the name of the settings section in appsettings.json must be equal to the name of your setting class.
+
+```csharp
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "TestSetting": {
+    "Name": "Arash",
+    "Email": "arashazimi0032@gmail.com",
+    "Age": 26
+  }
+}
+
+
+public class TestSetting : CleanBaseSetting
+{
+    public TestSetting1(IConfiguration configuration) : base(configuration)
+    {
+    }
+
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public int Age { get; set; }
 }
 ```
 

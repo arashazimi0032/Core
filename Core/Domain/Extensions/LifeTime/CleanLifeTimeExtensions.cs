@@ -1,4 +1,5 @@
 ﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.Extensions.Settings;
 using Core.Infrastructure.Repositories.UnitOfWork;
 using Core.Presentation.Middleware;
 using MediatR;
@@ -31,21 +32,13 @@ internal static class CleanLifeTimeExtensions
         foreach (Type type in types)
         {
             IEnumerable<Type> interfaces = GetImplementedInterfaces(type);
-            if (interfaces.Any())
+            foreach (Type interfaceType in interfaces)
             {
-                foreach (Type interfaceType in interfaces)
-                {
-                    services.AddTransient(interfaceType, type);
-                } 
-            }
-            else
-            {
-                if (type.IsAssignableTo(typeof(ICleanBaseMiddleware)))
-                {
-                    services.AddTransient(type);
-                }
+                services.AddTransient(interfaceType, type);
             }
         }
+
+        services.AddCleanMiddlewares(types);
 
         return services;
     }
@@ -66,6 +59,8 @@ internal static class CleanLifeTimeExtensions
             }
         }
 
+        services.AddCleanSettings(types);
+
         return services;
     }
     private static IServiceCollection AddScopedServices(this IServiceCollection services, Assembly assembly)
@@ -81,25 +76,18 @@ internal static class CleanLifeTimeExtensions
         foreach (Type type in types)
         {
             IEnumerable<Type> interfaces = GetImplementedInterfaces(type);
-            if (interfaces.Any())
+            foreach (Type interfaceType in interfaces)
             {
-                foreach (Type interfaceType in interfaces)
-                {
-                    services.AddScoped(interfaceType, type);
-                }
+                services.AddScoped(interfaceType, type);
             }
-            else
-            {
-                if (type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(CleanBaseUnitOfWork<,,>))
-                {
-                    services.AddScoped(type);
-                }
-            }
-            
         }
+
+        services.AddCleanUnitOfWork(types);
 
         return services;
     }
+
+    #region Helpers
     private static IEnumerable<Type> GetWithInterfaceClasses(this IEnumerable<Type> enumerable)
     {
         return enumerable
@@ -150,10 +138,12 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(ISupportRequiredService)) &&
             !i.Equals(typeof(IThreadPoolWorkItem)) &&
             !i.Equals(typeof(ITimer)) &&
-            !i.Equals(typeof(IAsyncResult)) &&            
+            !i.Equals(typeof(IAsyncResult)) &&
             !i.Equals(typeof(ICloneable)) &&
             !i.Equals(typeof(IMiddleware)) &&
             (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IPipelineBehavior<,>)))
             );
     }
+
+    #endregion
 }
