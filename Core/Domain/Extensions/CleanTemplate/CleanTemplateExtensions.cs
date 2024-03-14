@@ -9,7 +9,7 @@ namespace Core.Domain.Extensions.CleanTemplate;
 
 public static class CleanTemplateExtensions
 {
-    public static IServiceCollection AddDependencyInjection<TDIModule>(this IServiceCollection services)
+    public static IServiceCollection AddCleanTemplateDependencyInjection<TDIModule>(this IServiceCollection services)
         where TDIModule : CleanBaseDependencyInjectionModule
     {
         var assembly = typeof(TDIModule).Assembly;
