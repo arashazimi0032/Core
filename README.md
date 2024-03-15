@@ -114,13 +114,13 @@ If you have **Assemblies** other than the Web API Assembly in your solution (for
 2- Create a DIModule inside that Assembly.
 
 ```csharp
-public class MyAssemblyNameDIModule : CleanBaseDependencyInjectionModule
+public class MyAssemblyNameDIModule : CleanBaseDIModule
 {
 }
 ```
 3- Add this DIModule to Registration Flow inside Web API Program.cs After AddCleanTemplate().
 ```csharp
-builder.Services.AddDependencyInjection<MyAssemblyNameDIModule>();
+builder.Services.AddCleanTemplateDIModule<MyAssemblyNameDIModule>();
 ```
 Now all the services inside this assembly are injected as a LifetTme Service. (Any type of LifeTime service that you set according to the rules of the LifeTime Service Registeration mentioned above).
 
@@ -420,6 +420,8 @@ We also implemented ``ToPaginatedListAsync(CleanPage Page)`` and ``ToPaginatedLi
 public class TestException : CleanBaseException<ExceptionStatusCode>
 {
     public override ExceptionStatusCode ExceptionType => ExceptionStatusCode.CoreResource;
+    
+    public override string DefaultMessage => "This Is Test Exception";
 }
 public enum ExceptionStatusCode
 {

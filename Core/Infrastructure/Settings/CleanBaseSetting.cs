@@ -27,7 +27,7 @@ public abstract class CleanBaseSetting : ICleanBaseSingleton
         }
     }
 
-    private object? ConvertType(string? value, Type targetType)
+    private static object? ConvertType(string? value, Type targetType)
     {
         if (value is null)
         {

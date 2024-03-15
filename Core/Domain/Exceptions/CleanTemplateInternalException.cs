@@ -6,6 +6,8 @@ internal class CleanTemplateInternalException : CleanBaseException<CleanBaseExce
 {
     private readonly CleanBaseExceptionCode _internalExceptionCode = CleanBaseExceptionCode.Exception;
 
+    public override string DefaultMessage => "CleanTemplateInternalException";
+
     internal CleanTemplateInternalException()
     {
     }

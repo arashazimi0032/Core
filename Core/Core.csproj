@@ -7,21 +7,17 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>4.2.0</Version>
+    <Version>5.0.0</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Bug fix in Get Assembly of CleanBaseIdentityDbContext
-- Add CleanBaseDependencyInjectionModule Base Class and AddCleanTemplateDependencyInjection&lt;&gt; Extension Method for Injecting Dependencies and Register Services from Assemblies other than Web Api (Program.cs) Assembly.
-- Non-Generic CleanBaseException added for exceptions without need for StatusCode.
-- CleanBaseExceptionCode Enum with all Base SystemException types added for set type and ExceptionCode of CleanBaseException
-- ExceptionCode of CleanBaseException renamed to ExceptionType.
-- overrideable HttpStatusResponseType property with Default value of InternalServerError added to CleanBaseException.
-- CleanBaseSetting type added for reading and configuring settings from appsettings.json.
-- Code Refactor</PackageReleaseNotes>
+    <PackageReleaseNotes>- CleanBaseDependencyInjectionModule renamed to CleanBaseDIModule and moved to DIModules namespace instead of DependencyInjectionModules.
+- GlobalExceptionHangling added to request pipeline.
+- DefaultMessage abstract property added to CleanBaseException
+- AddCleanTemplateDependencyInjection renamed to AddCleanTemplateDIModule.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -54,6 +50,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
-﻿using Core.Domain.DependencyInjectionModules;
+﻿using Core.Domain.DIModules;
 using Core.Domain.Extensions.Endpoint;
+using Core.Domain.Extensions.GlobalExceptionHandling;
 using Core.Domain.Extensions.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,8 +10,8 @@ namespace Core.Domain.Extensions.CleanTemplate;
 
 public static class CleanTemplateExtensions
 {
-    public static IServiceCollection AddCleanTemplateDependencyInjection<TDIModule>(this IServiceCollection services)
-        where TDIModule : CleanBaseDependencyInjectionModule
+    public static IServiceCollection AddCleanTemplateDIModule<TDIModule>(this IServiceCollection services)
+        where TDIModule : CleanBaseDIModule
     {
         var assembly = typeof(TDIModule).Assembly;
 
@@ -30,6 +31,8 @@ public static class CleanTemplateExtensions
     public static IApplicationBuilder UseCleanTemplate(this IApplicationBuilder app)
     {
         var assembly = Assembly.GetCallingAssembly();
+
+        app.UseCleanGlobalExceptionHandling();
 
         app.UseRouting();
 
