@@ -1,6 +1,6 @@
 ﻿namespace Core.Domain.Exceptions;
 
-internal class ExceptionMessage
+public class ExceptionMessage
 {
     public string? Title {  get; set; }
     public string? HttpStatusResponseType { get; set; }

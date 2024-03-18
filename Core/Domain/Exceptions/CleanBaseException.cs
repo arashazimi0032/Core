@@ -1,39 +1,42 @@
-﻿using Core.Application.ServiceLifeTimes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Net;
 
 namespace Core.Domain.Exceptions;
 
-public abstract class CleanBaseException : SystemException, ICleanBaseIgnore
+public abstract class CleanBaseException : SystemException, ICleanBaseException
 {
     public abstract string DefaultMessage { get; }
     public virtual HttpStatusCode HttpStatusResponseType => HttpStatusCode.InternalServerError;
     public string HttpStatusResponseCode => Convert.ToInt32(HttpStatusResponseType).ToString();
+
+    private readonly bool _hasMessage = true;
     protected CleanBaseException()
     {
-        base.Data["DefaultMessage"] = DefaultMessage;
+        _hasMessage = false;
     }
     protected CleanBaseException(string? message)
         : base(message)
     {
+        _hasMessage = true;
     }
     protected CleanBaseException(string? message, Exception? innerException)
         : base(message, innerException)
     {
+        _hasMessage = true;
     }
     public override string Message
     {
         get
         {
-            if (base.Data.Contains("DefaultMessage"))
+            if (!_hasMessage)
             {
-                return base.Data["DefaultMessage"]?.ToString() ?? "";
+                return DefaultMessage;
             }
             return base.Message;
         }
     }
 
-    public override string ToString()
+    public virtual ExceptionMessage GetMessage()
     {
         var exceptionMessage = new ExceptionMessage()
         {
@@ -45,23 +48,28 @@ public abstract class CleanBaseException : SystemException, ICleanBaseIgnore
 
         if (InnerException is null)
         {
-            return JsonConvert.SerializeObject(exceptionMessage);
+            return exceptionMessage;
         }
 
-        if (InnerException.GetType().IsAssignableTo(typeof(CleanBaseException)))
+        if (InnerException is ICleanBaseException cleanInnerException)
         {
-            exceptionMessage.CleanInnerException = JsonConvert.DeserializeObject<ExceptionMessage>(InnerException.ToString());
+            exceptionMessage.CleanInnerException = cleanInnerException.GetMessage();
         }
         else
         {
             exceptionMessage.UnHandledInnerException = InnerException.ToString();
         }
 
-        return JsonConvert.SerializeObject(exceptionMessage);
+        return exceptionMessage;
+    }
+
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(GetMessage());
     }
 }
 
-public abstract class CleanBaseException<TCode> : CleanBaseException
+public abstract class CleanBaseException<TCode> : CleanBaseException, ICleanBaseException
     where TCode : Enum
 {
     public abstract TCode ExceptionType { get; }
@@ -80,7 +88,7 @@ public abstract class CleanBaseException<TCode> : CleanBaseException
     {
     }
 
-    public override string ToString()
+    public override ExceptionMessage GetMessage()
     {
         var exceptionMessage = new ExceptionMessage()
         {
@@ -94,18 +102,23 @@ public abstract class CleanBaseException<TCode> : CleanBaseException
 
         if (InnerException is null)
         {
-            return JsonConvert.SerializeObject(exceptionMessage);
+            return exceptionMessage;
         }
 
-        if (InnerException.GetType().IsAssignableTo(typeof(CleanBaseException)))
+        if (InnerException is ICleanBaseException cleanInnerException)
         {
-            exceptionMessage.CleanInnerException = JsonConvert.DeserializeObject<ExceptionMessage>(InnerException.ToString());
+            exceptionMessage.CleanInnerException = cleanInnerException.GetMessage();
         }
         else
         {
             exceptionMessage.UnHandledInnerException = InnerException.ToString();
         }
 
-        return JsonConvert.SerializeObject(exceptionMessage);
+        return exceptionMessage;
+    }
+
+    public override string ToString()
+    {
+        return JsonConvert.SerializeObject(GetMessage());
     }
 }

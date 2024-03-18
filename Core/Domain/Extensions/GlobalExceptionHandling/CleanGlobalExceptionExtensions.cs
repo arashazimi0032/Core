@@ -26,13 +26,11 @@ internal static class CleanGlobalExceptionExtensions
 
                 if (exception is null) return;
 
-                var parsedStackTrace = exception.StackTrace?.Split("\n")[0].Split().FirstOrDefault(t => t.Length > 0 && t.Contains("Controller"))?.Split(".") ?? [""];
-
                 var errorModel = new ErrorModel
                 {
                     ErrorTime = DateTime.Now,
-                    ControllerName = string.Join(".", parsedStackTrace[..^1]),
-                    ActionName = parsedStackTrace[^1],
+                    ControllerName = $"{context.Request.Scheme}://{context.Request.Host}{string.Join("/", context.Request.Path.ToString().Split("/")[..^1])}Controller",
+                    ActionName = string.Join("/", context.Request.Path.ToString().Split("/")[^1]),
                     ExceptionType = exception.GetType().FullName,
                     StackTrace = exception.StackTrace,
                     RequestUrl = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
@@ -42,10 +40,10 @@ internal static class CleanGlobalExceptionExtensions
                     UserIpAddress = context.Connection.RemoteIpAddress?.ToString(),
                 };
 
-                if (exception is CleanBaseException cleanBaseException)
+                if (exception is ICleanBaseException cleanBaseException)
                 {
                     context.Response.StatusCode = (int)cleanBaseException.HttpStatusResponseType;
-                    errorModel.CleanExceptionMessage = JsonConvert.DeserializeObject<ExceptionMessage>(exception.ToString());
+                    errorModel.CleanExceptionMessage = cleanBaseException.GetMessage();
                 }
                 else
                 {

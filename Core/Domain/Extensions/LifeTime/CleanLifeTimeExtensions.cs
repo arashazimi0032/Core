@@ -1,4 +1,5 @@
 ﻿using Core.Application.ServiceLifeTimes;
+using Core.Domain.Exceptions;
 using Core.Domain.Extensions.Settings;
 using Core.Infrastructure.Repositories.UnitOfWork;
 using Core.Presentation.Middleware;
@@ -106,6 +107,7 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(ICleanBaseTransient)) &&
             !i.Equals(typeof(ICleanBaseIgnore)) &&
             !i.Equals(typeof(ICleanBaseMiddleware)) &&
+            !i.Equals(typeof(ICleanBaseException)) &&
             !i.Equals(typeof(IDisposable)) &&
             !i.Equals(typeof(IAsyncDisposable)) &&
             !i.Equals(typeof(IEnumerable)) &&
