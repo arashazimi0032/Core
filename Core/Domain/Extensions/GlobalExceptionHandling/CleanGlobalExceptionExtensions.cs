@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Serilog;
 using System.Net;
 
 namespace Core.Domain.Extensions.GlobalExceptionHandling;
@@ -50,8 +51,74 @@ internal static class CleanGlobalExceptionExtensions
                     errorModel.UnHandledExceptionMessage = exception.Message;
                 }
 
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(errorModel).ToString());
+                Log.Logger.Error(exception, CreateMessageTemplate(errorModel));
+
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(errorModel));
             });
         });
     }
+
+    #region Private
+    private static string CreateMessageTemplate(ErrorModel errorModel)
+    {
+        var toReturn = "{\n" +
+            $"\tErrorTime: {errorModel.ErrorTime}\n" +
+            $"\tControllerName: {errorModel.ControllerName}\n" +
+            $"\tActionName: {errorModel.ActionName}\n" +
+            $"\tHttpMethod: {errorModel.HttpMethod}\n" +
+            $"\tExceptionType: {errorModel.ExceptionType}\n" +
+            "\tCleanExceptionMessage: {\n" +
+            $"{GetNestedTypes(errorModel.CleanExceptionMessage)}\n" +
+            "\t}\n" +
+            $"\tUnHandledExceptionMessage: {errorModel.UnHandledExceptionMessage}\n" +
+            $"\tUserIpAddress: {errorModel.UserIpAddress}\n" +
+            $"\tRequestUrl: {errorModel.RequestUrl}\n" +
+            $"\tRequestBody: {errorModel.RequestBody}\n" +
+            "\tRequestHeaders: {\n" +
+            $"{GetDictionaryString(errorModel.RequestHeaders)}\n" +
+            "\t}\n" +
+            "}";
+
+        return toReturn;
+    }
+
+    private static string GetNestedTypes(ExceptionMessage? exceptionMessage, int nestedLevel = 1)
+    {
+        var toReturn = "";
+        var tab = string.Concat(Enumerable.Repeat("\t", nestedLevel));
+        if (exceptionMessage is not null)
+        {
+            foreach (var property in exceptionMessage.GetType().GetProperties())
+            {
+                if (property.PropertyType.Equals(typeof(ExceptionMessage)))
+                {
+                    toReturn += $"\t{tab}{property.Name}: " + "{\n";
+                    toReturn += $"{GetNestedTypes((ExceptionMessage?)property.GetValue(exceptionMessage), nestedLevel + 1)}" +
+                        $"\t{tab}" + "}\n";
+                }
+                else
+                {
+                    toReturn += $"\t{tab}{property.Name}: {property.GetValue(exceptionMessage)}\n";
+                }
+            }
+        }
+        else
+        {
+            toReturn += $"\t{tab}null\n";
+        }
+
+        return toReturn;
+    }
+
+    private static string GetDictionaryString(Dictionary<string, string> dictionary)
+    {
+        var toReturn = "";
+
+        foreach (var key in dictionary.Keys)
+        {
+            toReturn += $"\t\t{key}: {dictionary[key]}\n";
+        }
+        return toReturn;
+    } 
+    #endregion
 }

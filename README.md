@@ -1,4 +1,5 @@
-# Clean Architecture Base Template
+# Clean Architecture Base Template 
+![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)   ![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)
 
 This package is a Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.
 
@@ -10,7 +11,7 @@ The .Net version used in this project is net8.0
 
 ## Dependencies
 
-#### net8.0
+### net8.0
 - Carter (>= 8.0.0)
 - MediatR (>= 12.2.0)
 - Microsoft.AspNetCore.Http.Abstractions (>= 2.2.0)
@@ -54,7 +55,7 @@ Cake
 
 I tryed to use CleanBase Prefix for all Base types in CleanTemplate Package so you can easily find them.
 
-#### Dependency Injection And Service Configurations / Registerations
+### Dependency Injection And Service Configurations / Registerations
 
 CleanTemplate Package has two Extension Method for configuring and registering all the types that are introduced in the rest of this tutorial.
 
@@ -106,7 +107,7 @@ The above service automatically registerd as below (you don't need to write the 
 builder.Services.AddTransient<IService, Service>();
 ```
 
-#### Dependency Injection And Service Configurations / Registerations From another Assembly
+### Dependency Injection And Service Configurations / Registerations From another Assembly
 
 If you have **Assemblies** other than the Web API Assembly in your solution (for example, several *ClassLibraries* to which the Web API has reference), and you have services in these Assemblies that you want to be Registered as a LifeTime service, ``AddCleanTemplate`` cannot Register them from Assemblies other than Web API. Therefore, you must Register those Assemblies in the following way:
 
@@ -124,7 +125,7 @@ builder.Services.AddCleanTemplateDIModule<MyAssemblyNameDIModule>();
 ```
 Now all the services inside this assembly are injected as a LifetTme Service. (Any type of LifeTime service that you set according to the rules of the LifeTime Service Registeration mentioned above).
 
-#### Create Model
+### Create Model
 
 The Generic ``CleanBaseEntity<T>`` used for creating an entity with Id's type as generic parameter. All structural equality constraints implemented for this type.
 The CleanBaseEntity class also has predefined `CreatedAt` and `ModifiedAt` properties that automatically filled in SaveChangesAsync.
@@ -147,7 +148,7 @@ public class Product : CleanBaseEntity<ProductId>
 ```
 Also you can use ``CleanBaseAggregateRoot<TId>`` to follow DDD concepts. The TId should be a ``CleanBaseValueObject``.
 
-#### Create DbContext
+### Create DbContext
 There are two Base DbContext implemented in CleanTemplate library; ``CleanBaseDbContext<TContext>`` and ``CleanBaseIdentityDbContext<TContext, TUser>``.
 SaveChangesAsync overrided for them to Automatically Auditing and Publishing Domain Events of type ``ICleanBaseDomainEvent``.
 
@@ -174,7 +175,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 ```
 you can use ``CleanBaseIdentityDbContext<TContext, TUser>`` similar to ``CleanBaseDbContext<TContext>``.
 
-#### Entity Configuration
+### Entity Configuration
 For Entity Configuration you can use ``ICleanBaseEntityConfiguration<TEntity>``. All configs automatically handled.
 ```csharp
 public class ProductConfiguration : ICleanBaseEntityConfiguration<Product>
@@ -186,7 +187,7 @@ public class ProductConfiguration : ICleanBaseEntityConfiguration<Product>
 }
 ```
 
-#### Repositories
+### Repositories
 Repositories splitted to Query and Command Repositories based on CQRS Concepts.
 For use of Base Repositories do as follows.
 ```csharp
@@ -308,7 +309,7 @@ IQueryable<TEntity> GetQueryable();
 IQueryable<TEntity> GetQueryableAsNoTrack();
 ```
 
-#### MediatR Request and RequestHandlers
+### MediatR Request and RequestHandlers
 We use of MediatR to implement CRUD operations instead of services.
 ```csharp
 public record CreateProductCommand(string Name, decimal Price) : ICleanBaseCommand<Product>;
@@ -353,7 +354,7 @@ public class ProductController : ControllerBase
 ```
 Also for Queries you can use of ``ICleanBaseQuery`` and ``ICleanBaseQueryHandler``.
 
-#### Domain Events
+### Domain Events
 
 You can create a Domain Event and it's handler so CleanTemplate automatically config and publishing them in SaveChangesAsync.
 ```csharp
@@ -389,7 +390,7 @@ public class Product : CleanBaseEntity<Guid>
 }
 ```
 
-#### Pagination
+### Pagination
 
 The CleanTemplate introduces a ``CleanPaginatedList<T>`` for get data in pagination format with below properties:
 ```csharp
@@ -412,9 +413,10 @@ public class CleanPage
 
 We also implemented ``ToPaginatedListAsync(CleanPage Page)`` and ``ToPaginatedList(CleanPage Page)`` extension methods for IQueryable and IEnumerable.
 
-#### Exceptions
+### Exceptions
 
-``CleanBaseException<TCode>`` implemented as a base exception class to Handling Exceptions. where the TCode is an enum to set an specific in-App ExceptionCode for every Exception and then you can handle Exception Messages in other languages using *.resx* files in C#.
+``CleanBaseException`` & ``CleanBaseException<TCode>`` implemented as a base exception class to Handling Exceptions. where the TCode is an enum to set an specific in-App ExceptionCode for every Exception and then you can handle Exception Messages in other languages using *.resx* files in C#.
+When you use this type of exception, GlobalExceptionHandling of CleanTemplate Package will recognize it and give you more complete details of the error that occurred.
 
 ```csharp
 public class TestException : CleanBaseException<ExceptionStatusCode>
@@ -429,28 +431,51 @@ public enum ExceptionStatusCode
 }
 ```
 
-#### Settings
+### Logging to Elasticsearch
+
+We use **Serilog** and **ElasticSearch** for logging all Exceptions. By default, the CleanTemplate GlobalExceptionHandling middleware records all logs only in Elasticsearch using serilog.
+To take advantage of the ``Logging to Elasticsearch`` feature in the CleanTemplate package, you must make the following settings. These settings are the minimum possible settings to benefit from the logging capability in the **CleanTemplate**. If you need more settings for **Srilog**, you can add them in the *appsettings.json*
+
+1- In the ``appsettings.json`` add below settings:
+```
+"Serilog": {
+    "MinimumLevel": {
+      "Default": "Error",
+      "Override": {
+        "Microsoft": "Error",
+        "System": "Error"
+      }
+    }
+  },
+  "ElasticConfiguration": {
+    "Uri": "http://localhost:9200"
+  }
+```
+2- in the ``program.cs`` add below configuration:
+```csharp
+builder.AddCleanLogger(builder.Configuration["ElasticConfiguration:Uri"]);
+```
+
+With above configurations, all error logs automatically records in Elasticsearch and you should see them in **Kibana** Dashboard.
+
+### Settings
 
 ``CleanBaseSetting`` class added for reading and configuring settings from appsettings.json.
 Make sure that the name of the settings section in appsettings.json must be equal to the name of your setting class.
 
+1- Add a setting in *appsettings.json*:
 ```csharp
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
   "TestSetting": {
     "Name": "Arash",
     "Email": "arashazimi0032@gmail.com",
     "Age": 26
   }
 }
+```
 
-
+2- Add A class with the same name as your setting class.
+```csharp
 public class TestSetting : CleanBaseSetting
 {
     public TestSetting1(IConfiguration configuration) : base(configuration)
@@ -465,7 +490,7 @@ public class TestSetting : CleanBaseSetting
 
 Then you just need to inject this TestSetting Class inside your services to access to its Properties.
 
-#### Middlewares
+### Middlewares
 
 ``ICleanBaseMiddleware`` implemented for automatically handling Middlewares in CleanTemplate.
 ```csharp
@@ -479,7 +504,7 @@ public class TestMiddleware : ICleanBaseMiddleware
 }
 ```
 
-#### Endpoints (Minimal APIs)
+### Endpoints (Minimal APIs)
 
 ``ICleanBaseEndpoint`` interface is a base type for implementing Endpoints as below:
 ```csharp
