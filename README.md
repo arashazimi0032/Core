@@ -22,6 +22,12 @@ The .Net version used in this project is net8.0
 - Microsoft.EntityFrameworkCore (>= 8.0.2)
 - Microsoft.EntityFrameworkCore.Relational (>= 8.0.2)
 - Microsoft.EntityFrameworkCore.SqlServer (>= 8.0.2)
+- Newtonsoft.Json (>= 13.0.3)
+- Serilog (>= 3.1.1)
+- Serilog.AspNetCore (>= 8.0.1)
+- Serilog.Enrichers.Environment (>= 2.3.0)
+- Serilog.Exceptions (>= 8.4.0)
+- Serilog.Sinks.Elasticsearch (>= 10.0.0)
 
 ## Installation 
 
@@ -77,7 +83,7 @@ app.UseCleanTemplate();
 app.Run();
 ```
 With adding ``builder.Services.AddCleanTemplate()`` and ``app.UseCleanTemplate();`` lines of code to your ``Program.cs``, all CleanTemplate capabilities will be registered except DbContext.
-fir registering DbContext you should normally register it using ``builder.Services.AddDbContext`` and ``builder.Services.AddIdentity``.
+for registering DbContext you should normally register it using ``builder.Services.AddDbContext`` and ``builder.Services.AddIdentity``.
 
 The CleanTemplate Package introduces four empty interfaces (``ICleanBaseScoped``, ``ICleanBaseSingleton``, ``ICleanBaseTransient``, ``ICleanBaseIgnore``) for handling LifeTime Service Registration.
 
