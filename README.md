@@ -1,20 +1,47 @@
-# Clean Architecture Base Template <img src="icon.png" height="28" width="32"/>
-[![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![GitHub Release](https://img.shields.io/github/v/release/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/releases)  [![GitHub Tag](https://img.shields.io/github/v/tag/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/tags)  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arashazimi0032/Core/dotnet-desktop.yml)](https://github.com/arashazimi0032/Core/actions/workflows/dotnet-desktop.yml)  [![GitHub last commit](https://img.shields.io/github/last-commit/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)    [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)   [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/issues) [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/pulls)  [![GitHub top language](https://img.shields.io/github/languages/top/arashazimi0032/Core)](https://github.com/arashazimi0032/Core)
+<span style="font-size:3em; font-weight:bold;">Clean Architecture Base Template <img src="icon.png" height="40" width="40"/></span>
 
+[![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![GitHub Release](https://img.shields.io/github/v/release/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/releases)  [![GitHub Tag](https://img.shields.io/github/v/tag/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/tags)  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arashazimi0032/Core/dotnet-desktop.yml)](https://github.com/arashazimi0032/Core/actions/workflows/dotnet-desktop.yml)  [![GitHub last commit](https://img.shields.io/github/last-commit/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)    [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)   [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/issues) [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/pulls)  [![GitHub top language](https://img.shields.io/github/languages/top/arashazimi0032/Core)](https://github.com/arashazimi0032/Core)
+---
 This package is a Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.
 
 This package provides you with all the necessary prerequisites to start a .Net project so that you don't have to be involved in building the infrastructure and foundation for the project.
 
 The .Net version used in this project is net8.0 
+
 <p align="center" width="100%">
 <img src="icon.png" height="128" width="128"/>
 </p>
 
+
+# Contents
+
+- [Statistics]
+- [Dependencies]
+- [Installation]
+- [Usage]
+    * [Dependency Injection And Service Configurations / Registerations]
+    * [Dependency Injection And Service Configurations / Registerations From another Assembly]
+    * [Create Model]
+    * [Create DbContext]
+    * [Entity Configuration]
+    * [Repositories and UnitOfWorks]
+    * [MediatR Request and RequestHandlers]
+    * [Domain Events]
+    * [Pagination]
+    * [Exceptions]
+    * [Logging to Elasticsearch]
+    * [Settings]
+    * [Middlewares]
+    * [Endpoints (Minimal APIs)]
+
+
+# Statistics
+
 ![Alt](https://repobeats.axiom.co/api/embed/13637dc3893af8dd3fa6337c598f047d5d2eb172.svg "Repobeats analytics image")
 
-## Dependencies
+# Dependencies
 
-### net8.0
+## net8.0
 - Carter (>= 8.0.0)
 - MediatR (>= 12.2.0)
 - Microsoft.AspNetCore.Http.Abstractions (>= 2.2.0)
@@ -29,29 +56,40 @@ The .Net version used in this project is net8.0
 - Serilog.Exceptions (>= 8.4.0)
 - Serilog.Sinks.Elasticsearch (>= 10.0.0)
 
-## Installation 
+# Installation 
 
 .Net CLI
+
 ```
 dotnet add package CleanTemplate --version x.x.x
 ```
+
 Package Manager
+
 ```
 NuGet\Install-Package CleanTemplate -Version x.x.x
 ```
+
 Package Reference
+
 ```
 <PackageReference Include="CleanTemplate" Version="x.x.x" />
+
 ```
 Paket CLI
+
 ```
 paket add CleanTemplate --version x.x.x
 ```
+
 Script & Interactive
+
 ```
 #r "nuget: CleanTemplate, x.x.x"
 ```
+
 Cake
+
 ```
 // Install CleanTemplate as a Cake Addin
 #addin nuget:?package=CleanTemplate&version=x.x.x
@@ -60,11 +98,11 @@ Cake
 #tool nuget:?package=CleanTemplate&version=x.x.x
 ```
 
-## Usage
+# Usage
 
 I tryed to use CleanBase Prefix for all Base types in CleanTemplate Package so you can easily find them.
 
-### Dependency Injection And Service Configurations / Registerations
+## Dependency Injection And Service Configurations / Registerations
 
 CleanTemplate Package has two Extension Method for configuring and registering all the types that are introduced in the rest of this tutorial.
 
@@ -82,6 +120,7 @@ app.UseCleanTemplate();
 
 app.Run();
 ```
+
 With adding ``builder.Services.AddCleanTemplate()`` and ``app.UseCleanTemplate();`` lines of code to your ``Program.cs``, all CleanTemplate capabilities will be registered except DbContext.
 for registering DbContext you should normally register it using ``builder.Services.AddDbContext`` and ``builder.Services.AddIdentity``.
 
@@ -111,12 +150,14 @@ public class Service : IService
     }
 }
 ```
+
 The above service automatically registerd as below (you don't need to write the line of code below):
+
 ```csharp
 builder.Services.AddTransient<IService, Service>();
 ```
 
-### Dependency Injection And Service Configurations / Registerations From another Assembly
+## Dependency Injection And Service Configurations / Registerations From another Assembly
 
 If you have **Assemblies** other than the Web API Assembly in your solution (for example, several *ClassLibraries* to which the Web API has reference), and you have services in these Assemblies that you want to be Registered as a LifeTime service, ``AddCleanTemplate`` cannot Register them from Assemblies other than Web API. Therefore, you must Register those Assemblies in the following way:
 
@@ -128,16 +169,20 @@ public class MyAssemblyNameDIModule : CleanBaseDIModule
 {
 }
 ```
+
 3- Add this DIModule to Registration Flow inside Web API Program.cs After AddCleanTemplate().
+
 ```csharp
 builder.Services.AddCleanTemplateDIModule<MyAssemblyNameDIModule>();
 ```
+
 Now all the services inside this assembly are injected as a LifetTme Service. (Any type of LifeTime service that you set according to the rules of the LifeTime Service Registeration mentioned above).
 
-### Create Model
+## Create Model
 
 The Generic ``CleanBaseEntity<T>`` used for creating an entity with Id's type as generic parameter. All structural equality constraints implemented for this type.
 The CleanBaseEntity class also has predefined `CreatedAt` and `ModifiedAt` properties that automatically filled in SaveChangesAsync.
+
 ```csharp
 public class Product : CleanBaseEntity<Guid>
 {
@@ -145,7 +190,9 @@ public class Product : CleanBaseEntity<Guid>
     public decimal Price { get; set; }
 }
 ```
+
 If you want to use strongly typeed Id you can use ``CleanBaseValueObject`` record.
+
 ```csharp
 public record ProductId(string Name, decimal Price) : CleanBaseValueObject;
 
@@ -155,9 +202,11 @@ public class Product : CleanBaseEntity<ProductId>
     public decimal Price { get; set; }
 }
 ```
+
 Also you can use ``CleanBaseAggregateRoot<TId>`` to follow DDD concepts. The TId should be a ``CleanBaseValueObject``.
 
-### Create DbContext
+## Create DbContext
+
 There are two Base DbContext implemented in CleanTemplate library; ``CleanBaseDbContext<TContext>`` and ``CleanBaseIdentityDbContext<TContext, TUser>``.
 SaveChangesAsync overrided for them to Automatically Auditing and Publishing Domain Events of type ``ICleanBaseDomainEvent``.
 
@@ -173,19 +222,24 @@ public class ApplicationDbContext : CleanBaseDbContext<ApplicationDbContext>
 
 }
 ```
+
 ``IPublisher`` automatically injected for publishing domain events.
 
 for configuring DbContext you should add AddDbContext in your Program.cs. (this part doesn't handled automatically in CleanTemplate)
+
 ```csharp
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 ```
+
 you can use ``CleanBaseIdentityDbContext<TContext, TUser>`` similar to ``CleanBaseDbContext<TContext>``.
 
-### Entity Configuration
+## Entity Configuration
+
 For Entity Configuration you can use ``ICleanBaseEntityConfiguration<TEntity>``. All configs automatically handled.
+
 ```csharp
 public class ProductConfiguration : ICleanBaseEntityConfiguration<Product>
 {
@@ -196,9 +250,11 @@ public class ProductConfiguration : ICleanBaseEntityConfiguration<Product>
 }
 ```
 
-### Repositories
+## Repositories and UnitOfWorks
+
 Repositories splitted to Query and Command Repositories based on CQRS Concepts.
 For use of Base Repositories do as follows.
+
 ```csharp
 public interface IProductCommandRepository : ICleanBaseCommandRepository<Product>
 {
@@ -224,6 +280,7 @@ public class ProductQueryRepository : CleanBaseQueryRepositry<ApplicationDbConte
 ```
 
 Then you should write command and query UnitOfWorks as below.
+
 ```csharp
 public interface ICommandUnitOfWork : ICleanBaseCommandUnitOfWork
 {
@@ -253,7 +310,9 @@ public class QueryUnitOfWork : CleanBaseQueryUnitOfWork<ApplicationDbContext>, I
     public IProductQueryRepository Products { get; private set; }
 }
 ```
+
 Finally for use of all of them you should write UnitOfWork.
+
 ```csharp
 public class UnitOfWork : CleanBaseUnitOfWork<ApplicationDbContext, CommandUnitOfWork, QueryUnitOfWork>
 {
@@ -264,6 +323,7 @@ public class UnitOfWork : CleanBaseUnitOfWork<ApplicationDbContext, CommandUnitO
 ```
 
 Now for use of UnitOfWork in a TestService you can inject Just UnitOfWork and use it.
+
 ```csharp
 public class TestService
 {
@@ -285,6 +345,7 @@ public class TestService
 All basic Transactions implemented in Base Repositories and you can use them.
 
 **Commands**
+
 ```csharp
 Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
 Task AddRangeAsync(params TEntity[] entities);
@@ -301,6 +362,7 @@ void RemoveRange(IEnumerable<TEntity> entity);
 ```
 
 **Queries**
+
 ```csharp
 Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 TEntity? GetById(TId id);
@@ -318,8 +380,10 @@ IQueryable<TEntity> GetQueryable();
 IQueryable<TEntity> GetQueryableAsNoTrack();
 ```
 
-### MediatR Request and RequestHandlers
+## MediatR Request and RequestHandlers
+
 We use of MediatR to implement CRUD operations instead of services.
+
 ```csharp
 public record CreateProductCommand(string Name, decimal Price) : ICleanBaseCommand<Product>;
 
@@ -342,7 +406,9 @@ internal sealed class CreateProductCommandHandler : ICleanBaseCommandHandler<Cre
     }
 }
 ```
+
 Then in controller: 
+
 ```csharp
 public class ProductController : ControllerBase
 {
@@ -361,11 +427,13 @@ public class ProductController : ControllerBase
     }
 }
 ```
+
 Also for Queries you can use of ``ICleanBaseQuery`` and ``ICleanBaseQueryHandler``.
 
-### Domain Events
+## Domain Events
 
 You can create a Domain Event and it's handler so CleanTemplate automatically config and publishing them in SaveChangesAsync.
+
 ```csharp
 public record ProductCreatedDomainEvent(string Name) : ICleanBaseDomainEvent;
 
@@ -377,7 +445,9 @@ public class ProductCreatedDomainEventHandler : ICleanBaseDomainEventHandler<Pro
     }
 }
 ```
+
 Then you should Raise it in Product Creation as below and then CleanTemplate automatically publishing it:
+
 ```csharp
 public class Product : CleanBaseEntity<Guid>
 {
@@ -399,9 +469,10 @@ public class Product : CleanBaseEntity<Guid>
 }
 ```
 
-### Pagination
+## Pagination
 
 The CleanTemplate introduces a ``CleanPaginatedList<T>`` for get data in pagination format with below properties:
+
 ```csharp
 public List<T> Items { get; set; }
 public CleanPage Page { get; set; } = new CleanPage();
@@ -412,6 +483,7 @@ public bool HasPreviousPage => Page.Number > 1;
 ```
 
 ``CleanPage`` is a format for give *PageNumber* and *PageSize* to PaginatedList.
+
 ```csharp
 public class CleanPage
 {
@@ -422,7 +494,7 @@ public class CleanPage
 
 We also implemented ``ToPaginatedListAsync(CleanPage Page)`` and ``ToPaginatedList(CleanPage Page)`` extension methods for IQueryable and IEnumerable.
 
-### Exceptions
+## Exceptions
 
 ``CleanBaseException`` & ``CleanBaseException<TCode>`` implemented as a base exception class to Handling Exceptions. where the TCode is an enum to set an specific in-App ExceptionCode for every Exception and then you can handle Exception Messages in other languages using *.resx* files in C#.
 When you use this type of exception, GlobalExceptionHandling of CleanTemplate Package will recognize it and give you more complete details of the error that occurred.
@@ -440,12 +512,13 @@ public enum ExceptionStatusCode
 }
 ```
 
-### Logging to Elasticsearch
+## Logging to Elasticsearch
 
 We use **Serilog** and **ElasticSearch** for logging all Exceptions. By default, the CleanTemplate GlobalExceptionHandling middleware records all logs only in Elasticsearch using serilog.
 To take advantage of the ``Logging to Elasticsearch`` feature in the CleanTemplate package, you must make the following settings. These settings are the minimum possible settings to benefit from the logging capability in the **CleanTemplate**. If you need more settings for **Srilog**, you can add them in the *appsettings.json*
 
 1- In the ``appsettings.json`` add below settings:
+
 ```
 "Serilog": {
     "MinimumLevel": {
@@ -460,19 +533,22 @@ To take advantage of the ``Logging to Elasticsearch`` feature in the CleanTempla
     "Uri": "http://localhost:9200"
   }
 ```
+
 2- in the ``program.cs`` add below configuration:
+
 ```csharp
 builder.AddCleanLogger(builder.Configuration["ElasticConfiguration:Uri"]);
 ```
 
 With above configurations, all error logs automatically records in Elasticsearch and you should see them in **Kibana** Dashboard.
 
-### Settings
+## Settings
 
 ``CleanBaseSetting`` class added for reading and configuring settings from appsettings.json.
 Make sure that the name of the settings section in appsettings.json must be equal to the name of your setting class.
 
 1- Add a setting in *appsettings.json*:
+
 ```csharp
 {
   "TestSetting": {
@@ -484,6 +560,7 @@ Make sure that the name of the settings section in appsettings.json must be equa
 ```
 
 2- Add A class with the same name as your setting class.
+
 ```csharp
 public class TestSetting : CleanBaseSetting
 {
@@ -499,9 +576,10 @@ public class TestSetting : CleanBaseSetting
 
 Then you just need to inject this TestSetting Class inside your services to access to its Properties.
 
-### Middlewares
+## Middlewares
 
 ``ICleanBaseMiddleware`` implemented for automatically handling Middlewares in CleanTemplate.
+
 ```csharp
 public class TestMiddleware : ICleanBaseMiddleware
 {
@@ -513,9 +591,10 @@ public class TestMiddleware : ICleanBaseMiddleware
 }
 ```
 
-### Endpoints (Minimal APIs)
+## Endpoints (Minimal APIs)
 
 ``ICleanBaseEndpoint`` interface is a base type for implementing Endpoints as below:
+
 ```csharp
 public class ProductEndPoint : ICleanBaseEndpoint
 {
