@@ -1,4 +1,4 @@
-<span style="font-size:3em; font-weight:bold;">Clean Architecture Base Template <img src="icon.png" height="40" width="40"/></span>
+# Clean Architecture Base Template <img src="icon.png" height="40" width="40"/>
 
 [![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![GitHub Release](https://img.shields.io/github/v/release/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/releases)  [![GitHub Tag](https://img.shields.io/github/v/tag/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/tags)  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arashazimi0032/Core/dotnet-desktop.yml)](https://github.com/arashazimi0032/Core/actions/workflows/dotnet-desktop.yml)  [![GitHub last commit](https://img.shields.io/github/last-commit/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)    [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)   [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/issues) [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/pulls)  [![GitHub top language](https://img.shields.io/github/languages/top/arashazimi0032/Core)](https://github.com/arashazimi0032/Core)
 ---
@@ -15,24 +15,24 @@ The .Net version used in this project is net8.0
 
 # Contents
 
-- [Statistics]
-- [Dependencies]
-- [Installation]
-- [Usage]
-    * [Dependency Injection And Service Configurations / Registerations]
-    * [Dependency Injection And Service Configurations / Registerations From another Assembly]
-    * [Create Model]
-    * [Create DbContext]
-    * [Entity Configuration]
-    * [Repositories and UnitOfWorks]
-    * [MediatR Request and RequestHandlers]
-    * [Domain Events]
-    * [Pagination]
-    * [Exceptions]
-    * [Logging to Elasticsearch]
-    * [Settings]
-    * [Middlewares]
-    * [Endpoints (Minimal APIs)]
+- [Statistics](https://github.com/arashazimi0032/Core?tab=readme-ov-file#statistics)
+- [Dependencies](https://github.com/arashazimi0032/Core?tab=readme-ov-file#dependencies)
+- [Installation](https://github.com/arashazimi0032/Core?tab=readme-ov-file#installation)
+- [Usage](https://github.com/arashazimi0032/Core?tab=readme-ov-file#usage)
+    * [Dependency Injection And Service Configurations / Registerations](https://github.com/arashazimi0032/Core?tab=readme-ov-file#dependency-injection-and-service-configurations--registerations)
+    * [Dependency Injection And Service Configurations / Registerations From another Assembly](https://github.com/arashazimi0032/Core?tab=readme-ov-file#dependency-injection-and-service-configurations--registerations-from-another-assembly)
+    * [Create Model](https://github.com/arashazimi0032/Core?tab=readme-ov-file#create-model)
+    * [Create DbContext](https://github.com/arashazimi0032/Core?tab=readme-ov-file#create-dbcontext)
+    * [Entity Configuration](https://github.com/arashazimi0032/Core?tab=readme-ov-file#entity-configuration)
+    * [Repositories and UnitOfWorks](https://github.com/arashazimi0032/Core?tab=readme-ov-file#repositories-and-unitofworks)
+    * [MediatR Request and RequestHandlers](https://github.com/arashazimi0032/Core?tab=readme-ov-file#mediatr-request-and-requesthandlers)
+    * [Domain Events](https://github.com/arashazimi0032/Core?tab=readme-ov-file#domain-events)
+    * [Pagination](https://github.com/arashazimi0032/Core?tab=readme-ov-file#pagination)
+    * [Exceptions](https://github.com/arashazimi0032/Core?tab=readme-ov-file#exceptions)
+    * [Logging to Elasticsearch](https://github.com/arashazimi0032/Core?tab=readme-ov-file#logging-to-elasticsearch)
+    * [Settings](https://github.com/arashazimi0032/Core?tab=readme-ov-file#settings)
+    * [Middlewares](https://github.com/arashazimi0032/Core?tab=readme-ov-file#middlewares)
+    * [Endpoints (Minimal APIs)](https://github.com/arashazimi0032/Core?tab=readme-ov-file#endpoints-minimal-apis)
 
 
 # Statistics
