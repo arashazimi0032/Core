@@ -1,13 +1,16 @@
-# Clean Architecture Base Template 
-![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)   ![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)
+# Clean Architecture Base Template <img src="icon.png" height="28" width="32"/>
+[![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate)](https://www.nuget.org/packages/CleanTemplate)  [![GitHub Release](https://img.shields.io/github/v/release/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/releases)  [![GitHub Tag](https://img.shields.io/github/v/tag/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/tags)  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arashazimi0032/Core/dotnet-desktop.yml)](https://github.com/arashazimi0032/Core/actions/workflows/dotnet-desktop.yml)  [![GitHub last commit](https://img.shields.io/github/last-commit/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)    [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)   [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/issues) [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/pulls)  [![GitHub top language](https://img.shields.io/github/languages/top/arashazimi0032/Core)](https://github.com/arashazimi0032/Core)
 
 This package is a Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.
 
 This package provides you with all the necessary prerequisites to start a .Net project so that you don't have to be involved in building the infrastructure and foundation for the project.
 
-The .Net version used in this project is net8.0
+The .Net version used in this project is net8.0 
+<p align="center" width="100%">
+<img src="icon.png" height="128" width="128"/>
+</p>
 
-[![CleanTemplate](https://github.com/arashazimi0032/Core/blob/master/icon.png)](https://www.nuget.org/packages/CleanTemplate#readme-body-tab)
+![Alt](https://repobeats.axiom.co/api/embed/13637dc3893af8dd3fa6337c598f047d5d2eb172.svg "Repobeats analytics image")
 
 ## Dependencies
 
