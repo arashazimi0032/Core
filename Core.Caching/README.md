@@ -1,4 +1,4 @@
-# Clean Architecture Base Template for Caching <img src="icon.png" height="40" width="40"/>
+# Clean Architecture Base Template for Caching <img src="../icon.png" height="40" width="40"/>
 
 [![NuGet Version](https://img.shields.io/nuget/v/CleanTemplate.Caching)](https://www.nuget.org/packages/CleanTemplate.Caching)  [![NuGet Downloads](https://img.shields.io/nuget/dt/CleanTemplate.Caching)](https://www.nuget.org/packages/CleanTemplate.Caching)  [![GitHub Release](https://img.shields.io/github/v/release/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/releases)  [![GitHub Tag](https://img.shields.io/github/v/tag/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/tags)  [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/arashazimi0032/Core/dotnet-desktop.yml)](https://github.com/arashazimi0032/Core/actions/workflows/dotnet-desktop.yml)  [![GitHub last commit](https://img.shields.io/github/last-commit/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)    [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/commits/master/)   [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/issues) [![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/arashazimi0032/Core)](https://github.com/arashazimi0032/Core/pulls)  [![GitHub top language](https://img.shields.io/github/languages/top/arashazimi0032/Core)](https://github.com/arashazimi0032/Core)
 ---
@@ -10,17 +10,17 @@ This package is one of the *[Cleantemplate](https://www.nuget.org/packages/Clean
 The .Net version used in this project is net8.0
 
 <p align="center" width="100%">
-<img src="icon.png" height="128" width="128"/>
+<img src="../icon.png" height="128" width="128"/>
 </p>
 
 # Contents
 
-- [Dependencies]()
-- [Installation]()
-- [Usage]()
-    * [Dependency Injection and Add Caching to the project]()
-    * [Redis Cache]()
-    * [Memory Cache]()
+- [Dependencies](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#dependencies)
+- [Installation](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#installation)
+- [Usage](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#usage)
+    * [Dependency Injection and Add Caching to the project](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#dependency-injection-and-add-caching-to-the-project)
+    * [Redis Cache](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#redis-cache)
+    * [Memory Cache](https://github.com/arashazimi0032/Core/tree/master/Core.Caching#memory-cache)
 
    
 # Dependencies
