@@ -23,7 +23,7 @@ jobs:
       run: dotnet restore
 
     - name: Build Core
-      run: dotnet build --configuration Release -project .\Core\Core.csproj
+      run: dotnet build --configuration Release
 
     - name: Pack Core
       run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core -project .\Core\Core.csproj
