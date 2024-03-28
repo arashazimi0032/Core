@@ -75,8 +75,8 @@ Package Reference
 
 ```
 <PackageReference Include="CleanTemplate" Version="x.x.x" />
-
 ```
+
 Paket CLI
 
 ```

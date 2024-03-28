@@ -25,9 +25,54 @@ The .Net version used in this project is net8.0
    
 # Dependencies
 
+## net8.0
+- CleanTemplate (>= 7.0.0)
+- StackExchange.Redis (>= 2.7.33)
+- StackExchange.Redis.Extensions.AspNetCore (>= 10.2.0)
+- StackExchange.Redis.Extensions.Core (>= 10.2.0)
+- StackExchange.Redis.Extensions.Newtonsoft (>= 10.2.0)
 
 # Installation
 
+.Net CLI
+
+```
+dotnet add package CleanTemplate.Caching --version x.x.x
+```
+
+Package Manager
+
+```
+NuGet\Install-Package CleanTemplate.Caching -Version x.x.x
+```
+
+Package Reference
+
+```
+<PackageReference Include="CleanTemplate.Caching" Version="x.x.x" />
+```
+
+Paket CLI
+
+```
+paket add CleanTemplate.Caching --version x.x.x
+```
+
+Script & Interactive
+
+```
+#r "nuget: CleanTemplate.Caching, x.x.x"
+```
+
+Cake
+
+```
+// Install CleanTemplate.Caching as a Cake Addin
+#addin nuget:?package=CleanTemplate.Caching&version=x.x.x
+
+// Install CleanTemplate.Caching as a Cake Tool
+#tool nuget:?package=CleanTemplate.Caching&version=x.x.x
+```
 
 # Usage
 
