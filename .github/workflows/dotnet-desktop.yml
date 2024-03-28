@@ -45,7 +45,5 @@ jobs:
     
     - name: Publish NuGet packages
       run: |
-        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_caching }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
-        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
-
-
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_caching }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
