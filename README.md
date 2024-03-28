@@ -33,6 +33,7 @@ The .Net version used in this project is net8.0
     * [Settings](https://github.com/arashazimi0032/Core?tab=readme-ov-file#settings)
     * [Middlewares](https://github.com/arashazimi0032/Core?tab=readme-ov-file#middlewares)
     * [Endpoints (Minimal APIs)](https://github.com/arashazimi0032/Core?tab=readme-ov-file#endpoints-minimal-apis)
+    * [Caching](https://github.com/arashazimi0032/Core/tree/master/Core.Caching)
 
 
 # Statistics
@@ -542,6 +543,8 @@ builder.AddCleanLogger(builder.Configuration["ElasticConfiguration:Uri"]);
 
 With above configurations, all error logs automatically records in Elasticsearch and you should see them in **Kibana** Dashboard.
 
+***Notable point***: If you enabled security and authentication for your ElasticSearch, then you should pass your elastic username and password to ``AddCleanLogger()``.
+
 ## Settings
 
 ``CleanBaseSetting`` class added for reading and configuring settings from appsettings.json.
@@ -609,3 +612,6 @@ public class ProductEndPoint : ICleanBaseEndpoint
     }
 }
 ```
+
+## Caching
+### [CleanTemplate.Caching Documentation](https://github.com/arashazimi0032/Core/tree/master/Core.Caching)

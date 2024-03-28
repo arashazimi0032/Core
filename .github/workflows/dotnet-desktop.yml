@@ -1,10 +1,9 @@
-name: Build and Deploy NuGet Package
+name: Build and Deploy NuGet Packages
 
 on:
   push:
-    branches:
-      - main
-      - master
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -22,13 +21,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build, Pack and Publish Core project
+    - name: Build and Pack Core project
       run: |
         cd Core
         dotnet build --configuration Release
         dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core
 
-    - name: Build, Pack and Publish Core.Cachin project
+    - name: Build and Pack Core.Caching project
       run: |
         cd Core.Caching
         dotnet build --configuration Release
@@ -43,5 +42,10 @@ jobs:
         $latestPackageCoreCaching = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Caching" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
         Write-Output "Latest package for Core.Caching: $latestPackageCoreCaching"
         Write-Output "::set-output name=latest_package_core_caching::$latestPackageCoreCaching"
+    
+    - name: Publish NuGet packages
+      run: |
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_caching }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
 
