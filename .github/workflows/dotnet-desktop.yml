@@ -30,7 +30,7 @@ jobs:
 
     - name: Build, Pack and Publish Core.Cachin project
       run: |
-        cd ..\Core.Caching
+        cd Core.Caching
         dotnet build --configuration Release
         dotnet pack --configuration Release --output ${{ github.workspace }}\Package
 
