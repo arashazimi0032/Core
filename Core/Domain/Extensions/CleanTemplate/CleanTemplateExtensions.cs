@@ -31,18 +31,27 @@ public static class CleanTemplateExtensions
         return services;
     }
 
-    public static WebApplicationBuilder AddCleanLogger(this WebApplicationBuilder builder, string elasticSearchUri)
+    public static WebApplicationBuilder AddCleanLogger(
+        this WebApplicationBuilder builder, 
+        string elasticSearchUri, 
+        string? elasticSearchUsername = null,
+        string? elasticSearchPassword = null)
     {
-        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        string? environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        ElasticsearchSinkOptions elasticsearchSinkOptions = new ElasticsearchSinkOptions(new Uri(elasticSearchUri))
+        {
+            AutoRegisterTemplate = true,
+            IndexFormat = $"{Assembly.GetCallingAssembly().GetName().Name?.ToLower()}-{environment?.ToLower()}-{DateTime.Now:yyyy-MM-dd}" ?? "",
+            ModifyConnectionSettings = x => x
+                                            .BasicAuthentication(elasticSearchUsername ?? "elastic", elasticSearchPassword ?? "")
+                                            .ServerCertificateValidationCallback((sender, certificate, chain, sslPolicyErrors) => true)
+        };
+
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .Enrich.WithExceptionDetails()
-            .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(elasticSearchUri))
-            {
-                AutoRegisterTemplate = true,
-                IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name?.ToLower()}-{environment?.ToLower()}-{DateTime.Now:yyyy-MM-dd}" ?? "",
-            })
-            .Enrich.WithProperty("Environment", environment)
+            .WriteTo.Elasticsearch(elasticsearchSinkOptions)
+        .Enrich.WithProperty("Environment", environment)
             .ReadFrom.Configuration(builder.Configuration)
             .CreateLogger();
 

@@ -2,8 +2,9 @@ name: Build and Deploy NuGet Package
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
+      - master
 
 jobs:
   build:
@@ -21,18 +22,26 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release
+    - name: Build Core
+      run: dotnet build --configuration Release -project Core\Core.csproj
 
-    - name: Pack
-      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package
+    - name: Pack Core
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core -project Core\Core.csproj
+
+    - name: Build Core.Caching
+      run: dotnet build --configuration Release -project Core.Caching\Core.Caching.csproj
+
+    - name: Pack Core.Caching
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Caching -project Core.Caching\Core.Caching.csproj
 
     - name: Find latest .nupkg file
       id: find-package
       run: |
-        $latestPackage = Get-ChildItem -Path "${{ github.workspace }}\Package" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-        Write-Output "Latest package: $latestPackage"
-        Write-Output "::set-output name=latest_package::$latestPackage"
+        $latestPackageCore = Get-ChildItem -Path "${{ github.workspace }}\Package\Core" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Output "Latest package for Core: $latestPackageCore"
+        Write-Output "::set-output name=latest_package_core::$latestPackageCore"
+        $latestPackageCoreCaching = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Caching" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Output "Latest package for Core.Caching: $latestPackageCoreCaching"
+        Write-Output "::set-output name=latest_package_core_caching::$latestPackageCoreCaching"
 
-    - name: Publish NuGet package
-      run: dotnet nuget push ${{ steps.find-package.outputs.latest_package }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+

@@ -7,14 +7,20 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>6.0.0</Version>
+    <Version>7.0.0</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Logging to ElasticSearch using AddCleanLogger(string elasticSearchUri) and Serilog configuration in appsettings.json.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Add New Package CleanTemplate.Caching for Redis and Memory Cache.
+- AddCleanCaching() Extension added as Extension for IServiceCollection to Register CleanTemplate.Caching Package.
+- ICleanBaseRedisCache and CleanBaseRedisCache added as a Base Repository for Redis Caches.
+- ICleanBaseMemoryCache and CleanBaseMemoryCache added as a Base Repository for Memory Caches.
+- Bug Fix and Refactor CleanBaseSetting for better performance and generalization.
+- Add two optional parameter elasticSearchUsername, elasticSearchPassword to AddCleanLogger() extension method for situations that your elastic search need authentication and has https host address.
+- Performance of Automatic Service Registration using Reflection was improved.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>

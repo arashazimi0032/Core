@@ -1,7 +1,6 @@
 ﻿using Core.Application.ServiceLifeTimes;
 using Core.Domain.Exceptions;
 using Core.Domain.Extensions.Settings;
-using Core.Infrastructure.Repositories.UnitOfWork;
 using Core.Presentation.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -15,20 +14,20 @@ internal static class CleanLifeTimeExtensions
 {
     internal static IServiceCollection AddLifeTimeServices(this IServiceCollection services, Assembly assembly)
     {
+        IEnumerable<Type> types = assembly
+            .GetTypes()
+            .GetWithInterfaceClasses();
+
         services
-            .AddTransientServices(assembly)
-            .AddSingletonServices(assembly)
-            .AddScopedServices(assembly);
+            .AddTransientServices(types)
+            .AddSingletonServices(types)
+            .AddScopedServices(types);
 
         return services;
     }
-    private static IServiceCollection AddTransientServices(this IServiceCollection services, Assembly assembly)
+    private static IServiceCollection AddTransientServices(this IServiceCollection services, IEnumerable<Type> types)
     {
-        IEnumerable<Type> types = assembly
-            .GetTypes()
-            .Where(t =>
-            t.IsAssignableTo(typeof(ICleanBaseTransient)))
-            .GetWithInterfaceClasses();
+        types = types.Where(t => t.IsAssignableTo(typeof(ICleanBaseTransient)));
 
         foreach (Type type in types)
         {
@@ -43,13 +42,9 @@ internal static class CleanLifeTimeExtensions
 
         return services;
     }
-    private static IServiceCollection AddSingletonServices(this IServiceCollection services, Assembly assembly)
+    private static IServiceCollection AddSingletonServices(this IServiceCollection services, IEnumerable<Type> types)
     {
-        IEnumerable<Type> types = assembly
-            .GetTypes()
-            .Where(t =>
-            t.IsAssignableTo(typeof(ICleanBaseSingleton)))
-            .GetWithInterfaceClasses();
+        types = types.Where(t => t.IsAssignableTo(typeof(ICleanBaseSingleton)));
 
         foreach (Type type in types)
         {
@@ -64,15 +59,12 @@ internal static class CleanLifeTimeExtensions
 
         return services;
     }
-    private static IServiceCollection AddScopedServices(this IServiceCollection services, Assembly assembly)
+    private static IServiceCollection AddScopedServices(this IServiceCollection services, IEnumerable<Type> types)
     {
-        IEnumerable<Type> types = assembly
-            .GetTypes()
-            .Where(t => 
+        types = types.Where(t =>
             t.IsAssignableTo(typeof(ICleanBaseScoped)) ||
             (!t.IsAssignableTo(typeof(ICleanBaseLifeTime)) &&
-            !t.IsAssignableTo(typeof(ICleanBaseIgnore))))
-            .GetWithInterfaceClasses();
+            !t.IsAssignableTo(typeof(ICleanBaseIgnore))));
 
         foreach (Type type in types)
         {
@@ -93,12 +85,15 @@ internal static class CleanLifeTimeExtensions
     {
         return enumerable
             .Where(t =>
-            t is { IsInterface: false, IsAbstract: false, IsClass: true }
-            && t.GetInterfaces().Length > 0);
+            t is { IsInterface: false, IsAbstract: false, IsClass: true } &&
+            t.GetInterfaces().Length > 0 &&
+            !t.Name.Contains('<') &&
+            !t.Name.Contains(">d__") &&
+            !t.Name.Contains(">b__"));
     }
     private static IEnumerable<Type> GetImplementedInterfaces(Type type)
     {
-        return type
+        var implementedInterfaces = type
             .GetInterfaces()
             .Where(i =>
             !i.Equals(typeof(ICleanBaseLifeTime)) &&
@@ -145,6 +140,8 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(IMiddleware)) &&
             (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IPipelineBehavior<,>)))
             );
+
+        return implementedInterfaces.Except(implementedInterfaces.SelectMany(i => i.GetInterfaces()));
     }
 
     #endregion

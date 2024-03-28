@@ -1,0 +1,1 @@
+# Clean Architecture Base Template for Caching

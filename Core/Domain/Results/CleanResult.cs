@@ -11,20 +11,20 @@ public class CleanResult
         {
             throw new CleanTemplateInternalException(
                 "A success Result should has None Error.",
-                CleanBaseExceptionCode.InvalidOperationException,
+                CleanBaseExceptionCode.CleanResultException,
                 new CleanTemplateInternalException(
                     "CleanResult class could not be success with non-None error at the same time.",
-                    CleanBaseExceptionCode.CleanResultException));
+                    CleanBaseExceptionCode.InvalidOperationException));
         }
 
         if (!isSuccess && error == CleanError.None)
         {
             throw new CleanTemplateInternalException(
                 "A failure Result should not has None Error.",
-                CleanBaseExceptionCode.InvalidOperationException,
+                CleanBaseExceptionCode.CleanResultException,
                 new CleanTemplateInternalException(
                     "CleanResult class could not be failure with None error at the same time.",
-                    CleanBaseExceptionCode.CleanResultException));
+                    CleanBaseExceptionCode.InvalidOperationException));
         }
 
         IsSuccess = isSuccess;
@@ -77,8 +77,8 @@ public class CleanResult<TValue> : CleanResult
         ? _value
         : throw new CleanTemplateInternalException(
             "The value of a failure result can not be accessed.",
-            CleanBaseExceptionCode.InvalidOperationException,
+            CleanBaseExceptionCode.CleanResultException,
             new CleanTemplateInternalException(
                 "CleanResult class could not return the value of a failure result!",
-                CleanBaseExceptionCode.CleanResultException));
+                CleanBaseExceptionCode.InvalidOperationException));
 }

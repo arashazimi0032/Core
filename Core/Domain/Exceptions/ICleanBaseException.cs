@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Core.Domain.Exceptions;
 
-internal interface ICleanBaseException : ICleanBaseIgnore
+public interface ICleanBaseException : ICleanBaseIgnore
 {
     HttpStatusCode HttpStatusResponseType { get; }
 

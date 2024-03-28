@@ -19,5 +19,7 @@ public enum CleanBaseExceptionCode
     OutOfMemoryException = 15,
 
     CleanBaseSettingException = 1000,
-    CleanResultException = 1001
+    CleanResultException = 1001,
+    CleanBaseRedisCachingException = 1002,
+    CleanBaseMemoryCachingException = 1003
 }
