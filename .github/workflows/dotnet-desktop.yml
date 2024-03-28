@@ -22,17 +22,17 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build Core
-      run: dotnet build --configuration Release --project .\Core\Core.csproj
+    - name: Build, Pack and Publish Core project
+      run: |
+        cd Core
+        dotnet build --configuration Release
+        dotnet pack --configuration Release --output ${{ github.workspace }}\Package
 
-    - name: Pack Core
-      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core --project .\Core\Core.csproj
-
-    - name: Build Core.Caching
-      run: dotnet build --configuration Release --project .\Core.Caching\Core.Caching.csproj
-
-    - name: Pack Core.Caching
-      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Caching --project .\Core.Caching\Core.Caching.csproj
+    - name: Build, Pack and Publish Core.Cachin project
+      run: |
+        cd ../Core.Caching
+        dotnet build --configuration Release
+        dotnet pack --configuration Release --output ${{ github.workspace }}\Package
 
     - name: Find latest .nupkg file
       id: find-package
