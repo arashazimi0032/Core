@@ -23,16 +23,16 @@ jobs:
       run: dotnet restore
 
     - name: Build Core
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release --project .\Core\Core.csproj
 
     - name: Pack Core
-      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core -project .\Core\Core.csproj
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core --project .\Core\Core.csproj
 
     - name: Build Core.Caching
-      run: dotnet build --configuration Release -project .\Core.Caching\Core.Caching.csproj
+      run: dotnet build --configuration Release --project .\Core.Caching\Core.Caching.csproj
 
     - name: Pack Core.Caching
-      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Caching -project .\Core.Caching\Core.Caching.csproj
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Caching --project .\Core.Caching\Core.Caching.csproj
 
     - name: Find latest .nupkg file
       id: find-package
