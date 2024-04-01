@@ -156,6 +156,7 @@ public class Request2 : CleanBaseGrpcMessage
 {
     // Some Properties
 }
+
 public class Response1 : CleanBaseGrpcMessage
 {
     // Some Properties
@@ -227,6 +228,8 @@ public class MyClient : CleanBaseGrpcClient, IMyClient
         : base(cleanGrpcClientFactory, configuration)
     {
     }
+
+    public IMyContract MyContract { get; private set; }
 }
 ```
 
@@ -247,7 +250,7 @@ Also you should create a Section inside of ``appsettings.json`` file of your **C
     }
   },
   "MyClient": {
-    "ServerAddress": "https://localhost:7228" // this is the Addres of your destination Server.
+    "ServerAddress": "https://localhost:7228" // this is the Address of your destination Server.
   }
 ```
 
