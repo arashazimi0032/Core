@@ -137,6 +137,7 @@ public class ContractDIModule : CleanBaseDIModule
 // Register ContractDIModule inside of ClientWebAPI Program.cs
 
 builder.Services.AddCleanTemplate();
+
 builder.Services.AddCleanTemplateDIModule<ContractDIModule>();
 ```
 
