@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>CleanTemplate.Grpc</PackageId>
+    <Title>CleanTemplate.Grpc</Title>
+    <Version>7.5.0</Version>
+    <Authors>arashazimi0032</Authors>
+    <Product>CleanTemplate.Grpc</Product>
+    <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Grpc Communication.</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
+    <PackageTags>CleanTemplate;CleanArchitecture;Grpc;Abstraction;ServiceModel;HTTP2</PackageTags>
+    <PackageReleaseNotes>- Add New Package CleanTemplate.Grpc for HTTP/2 Communication protocol.
+- Add ICleanBaseGrpcContract for base of Grpc Contracts.
+- Add CleanBaseGrpcMessage for base of Grpc Messages.
+- Add ICleanGrpcClientFactory and CleanGrpcClientFactory as implementation for creating Grpc client of type of your Contract.
+- Add ICleanBaseGrpcClient and CleanBaseGrpcClient base types for creating Grpc Clients.
+- Add AddCleanGrpc() Extension Method for IServiceCollection for Registering CleanTemplate.Grpc Package.
+- Add MapCleanGrpc(Assembly assemblyOfContractImplementations) Extension Method for IEndpointRouteBuilder for Registering Contract Implementations.</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.62.0" />
+    <PackageReference Include="MessagePack" Version="2.5.140" />
+    <PackageReference Include="ServiceModel.Grpc.AspNetCore" Version="1.8.2" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

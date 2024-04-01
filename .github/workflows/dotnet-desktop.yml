@@ -33,6 +33,12 @@ jobs:
         dotnet build --configuration Release
         dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Caching
 
+    - name: Build and Pack Core.Grpc project
+      run: |
+        cd Core.Grpc
+        dotnet build --configuration Release
+        dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Grpc
+
     - name: Find latest .nupkg file
       id: find-package
       run: |
@@ -42,8 +48,12 @@ jobs:
         $latestPackageCoreCaching = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Caching" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
         Write-Output "Latest package for Core.Caching: $latestPackageCoreCaching"
         Write-Output "::set-output name=latest_package_core_caching::$latestPackageCoreCaching"
+        $latestPackageCoreGrpc = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Grpc" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Output "Latest package for Core.Grpc: $latestPackageCoreGrpc"
+        Write-Output "::set-output name=latest_package_core_grpc::$latestPackageCoreGrpc"
     
     - name: Publish NuGet packages
       run: |
         dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_caching }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_grpc }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
         dotnet nuget push ${{ steps.find-package.outputs.latest_package_core }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

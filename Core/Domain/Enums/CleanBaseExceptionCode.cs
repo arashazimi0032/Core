@@ -21,5 +21,7 @@ public enum CleanBaseExceptionCode
     CleanBaseSettingException = 1000,
     CleanResultException = 1001,
     CleanBaseRedisCachingException = 1002,
-    CleanBaseMemoryCachingException = 1003
+    CleanBaseMemoryCachingException = 1003,
+    CleanBaseGrpcClientException = 1004,
+    CleanGrpcClientFactoryException = 1005
 }

@@ -34,6 +34,7 @@ The .Net version used in this project is net8.0
     * [Middlewares](https://github.com/arashazimi0032/Core?tab=readme-ov-file#middlewares)
     * [Endpoints (Minimal APIs)](https://github.com/arashazimi0032/Core?tab=readme-ov-file#endpoints-minimal-apis)
     * [Caching](https://github.com/arashazimi0032/Core/tree/master/Core.Caching)
+    * [GRPC](https://github.com/arashazimi0032/Core/tree/master/Core.Grpc)
 
 
 # Statistics
@@ -615,3 +616,6 @@ public class ProductEndPoint : ICleanBaseEndpoint
 
 ## Caching
 ### [CleanTemplate.Caching Documentation](https://github.com/arashazimi0032/Core/tree/master/Core.Caching)
+
+## GRPC
+### [CleanTemplate.Grpc Documentation](https://github.com/arashazimi0032/Core/tree/master/Core.Grpc)
