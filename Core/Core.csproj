@@ -7,21 +7,20 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>7.5.0</Version>
+    <Version>8.0.0</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>
     <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Contracts;Abstraction</PackageTags>
-    <PackageReleaseNotes>- Add New Package CleanTemplate.Grpc for HTTP/2 Communication protocol.
-- Add ICleanBaseGrpcContract for base of Grpc Contracts.
-- Add CleanBaseGrpcMessage for base of Grpc Messages.
-- Add ICleanGrpcClientFactory and CleanGrpcClientFactory as implementation for creating Grpc client of type of your Contract.
-- Add ICleanBaseGrpcClient and CleanBaseGrpcClient base types for creating Grpc Clients.
-- Add AddCleanGrpc() Extension Method for IServiceCollection for Registering CleanTemplate.Grpc Package.
-- Add MapCleanGrpc(Assembly assemblyOfContractImplementations) Extension Method for IEndpointRouteBuilder for Registering Contract Implementations.
-- Some Bug fix and Performance optimization in CleanTemplate and CleanTemplate.Caching Packages.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Add New Package CleanTemplate.Messaging for RabbitMQ Messaging.
+- Add CleanRabbitMqHostSetting for RabbitMQ Host Settings.
+- Add CleanBaseRabbitMqSetting for RabbitMQ Settings.
+- Add CleanBaseRabbitMqMessage as Base type for RabbitMQ Messages.
+- Add CleanBaseRabbitMqPublisher and CleanBaseRabbitMqSubscriber as Base types for RabbitMQ publisher and subscriber.
+- Add AddCleanMessaging(Assembly assembly) as an Extension Method for IServiceCollection for register CleanTemplate.Messaging Package.
+- Bug fix and performance optimization.</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
     <PackAsTool>False</PackAsTool>
     <PackageReadmeFile>README.md</PackageReadmeFile>

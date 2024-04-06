@@ -23,5 +23,9 @@ public enum CleanBaseExceptionCode
     CleanBaseRedisCachingException = 1002,
     CleanBaseMemoryCachingException = 1003,
     CleanBaseGrpcClientException = 1004,
-    CleanGrpcClientFactoryException = 1005
+    CleanGrpcClientFactoryException = 1005,
+    CleanRabbitMqConnectionFactoryException = 1006,
+    CleanBaseRabbitMqPublisherException = 1007,
+    CleanBaseRabbitMqSubscriberConfigurationException = 1008,
+    CleanBaseRabbitMqSubscriberException = 1009
 }

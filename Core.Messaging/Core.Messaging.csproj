@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>CleanTemplate.Messaging</PackageId>
+    <Title>CleanTemplate.Messaging</Title>
+    <Version>8.0.0</Version>
+    <Authors>arashazimi0032</Authors>
+    <Product>CleanTemplate.Messaging</Product>
+    <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Messaging between Microservices.</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
+    <PackageTags>CleanTemplate;CleanArchitecture;Abstraction;Contract;Messaging;RabbitMQ</PackageTags>
+    <PackageReleaseNotes>- Add New Package CleanTemplate.Messaging for RabbitMQ Messaging.
+- Add CleanRabbitMqHostSetting for RabbitMQ Host Settings.
+- Add CleanBaseRabbitMqSetting for RabbitMQ Settings.
+- Add CleanBaseRabbitMqMessage as Base type for RabbitMQ Messages.
+- Add CleanBaseRabbitMqPublisher and CleanBaseRabbitMqSubscriber as Base types for RabbitMQ publisher and subscriber.
+- Add AddCleanMessaging(Assembly assembly) as an Extension Method for IServiceCollection for register CleanTemplate.Messaging Package.</PackageReleaseNotes>
+    <PackAsTool>False</PackAsTool>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,6 +1,5 @@
 ﻿using Core.Infrastructure.Settings;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Core.Domain.Extensions.Settings;
 

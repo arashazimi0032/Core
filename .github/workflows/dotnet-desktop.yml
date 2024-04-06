@@ -39,6 +39,12 @@ jobs:
         dotnet build --configuration Release
         dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Grpc
 
+    - name: Build and Pack Core.Messaging project
+      run: |
+        cd Core.Messaging
+        dotnet build --configuration Release
+        dotnet pack --configuration Release --output ${{ github.workspace }}\Package\Core.Messaging
+
     - name: Find latest .nupkg file
       id: find-package
       run: |
@@ -51,9 +57,13 @@ jobs:
         $latestPackageCoreGrpc = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Grpc" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
         Write-Output "Latest package for Core.Grpc: $latestPackageCoreGrpc"
         Write-Output "::set-output name=latest_package_core_grpc::$latestPackageCoreGrpc"
+        $latestPackageCoreMessaging = Get-ChildItem -Path "${{ github.workspace }}\Package\Core.Messaging" -Filter *.nupkg | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        Write-Output "Latest package for Core.Messaging: $latestPackageCoreMessaging"
+        Write-Output "::set-output name=latest_package_core_messaging::$latestPackageCoreMessaging"
     
     - name: Publish NuGet packages
       run: |
+        dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_messaging }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
         dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_caching }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
         dotnet nuget push ${{ steps.find-package.outputs.latest_package_core_grpc }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
         dotnet nuget push ${{ steps.find-package.outputs.latest_package_core }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

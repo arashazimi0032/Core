@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Caching</PackageId>
     <Title>CleanTemplate.Caching</Title>
-    <Version>7.5.0</Version>
+    <Version>8.0.0</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Caching</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Redis and Memory Caching.</Description>
