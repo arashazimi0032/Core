@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Messaging</PackageId>
     <Title>CleanTemplate.Messaging</Title>
-    <Version>8.0.0</Version>
+    <Version>8.0.1</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Messaging</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Messaging between Microservices.</Description>
@@ -14,12 +14,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Abstraction;Contract;Messaging;RabbitMQ</PackageTags>
-    <PackageReleaseNotes>- Add New Package CleanTemplate.Messaging for RabbitMQ Messaging.
-- Add CleanRabbitMqHostSetting for RabbitMQ Host Settings.
-- Add CleanBaseRabbitMqSetting for RabbitMQ Settings.
-- Add CleanBaseRabbitMqMessage as Base type for RabbitMQ Messages.
-- Add CleanBaseRabbitMqPublisher and CleanBaseRabbitMqSubscriber as Base types for RabbitMQ publisher and subscriber.
-- Add AddCleanMessaging(Assembly assembly) as an Extension Method for IServiceCollection for register CleanTemplate.Messaging Package.</PackageReleaseNotes>
+    <PackageReleaseNotes>bug fix</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>

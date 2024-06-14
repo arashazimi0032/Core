@@ -5,6 +5,7 @@ using Core.Presentation.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Collections;
 using System.Reflection;
 
@@ -138,7 +139,8 @@ internal static class CleanLifeTimeExtensions
             !i.Equals(typeof(IAsyncResult)) &&
             !i.Equals(typeof(ICloneable)) &&
             !i.Equals(typeof(IMiddleware)) &&
-            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IPipelineBehavior<,>)))
+            (!i.IsGenericType || !i.GetGenericTypeDefinition().Equals(typeof(IPipelineBehavior<,>))) &&
+            !i.Equals(typeof(IHostedService))
             );
 
         return implementedInterfaces.Except(implementedInterfaces.SelectMany(i => i.GetInterfaces()));

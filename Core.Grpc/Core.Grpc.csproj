@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Grpc</PackageId>
     <Title>CleanTemplate.Grpc</Title>
-    <Version>8.0.0</Version>
+    <Version>8.0.1</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Grpc</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Grpc Communication.</Description>
@@ -14,7 +14,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Grpc;Abstraction;ServiceModel;HTTP2</PackageTags>
-    <PackageReleaseNotes>- Bug fix and performance optimization.</PackageReleaseNotes>
+    <PackageReleaseNotes>bug fix</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
