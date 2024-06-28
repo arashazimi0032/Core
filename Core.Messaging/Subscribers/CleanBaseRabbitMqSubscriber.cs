@@ -1,6 +1,5 @@
-﻿using Core.Domain.Enums;
-using Core.Messaging.ConnectionFactories;
-using Core.Messaging.Exceptions;
+﻿using Core.Messaging.ConnectionFactories;
+using Core.Messaging.Helper;
 using Core.Messaging.Messages;
 using Core.Messaging.Settings;
 using Microsoft.Extensions.Hosting;
@@ -57,42 +56,36 @@ public abstract class CleanBaseRabbitMqSubscriber<TMessage, TSetting> : CleanBas
         }
         catch (Exception ex)
         {
-            throw new CleanTemplateMessagingInternalException(
-                "CleanBaseRabbitMqSubscriber Constructor Exception: Something went wrong. Could not config RabbitMQ Subscriber.",
-                CleanBaseExceptionCode.CleanBaseRabbitMqSubscriberConfigurationException,
-                new CleanTemplateMessagingInternalException(
-                    ex.Message,
-                    CleanBaseExceptionCode.Exception));
+            RabbitMqExceptionHandling.HandleException(ex, this.GetType().Name, _settings, (TMessage)null);
         }
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        try
+        var consumer = new EventingBasicConsumer(_channel);
+
+        consumer.Received += async (ch, ea) =>
         {
-            var consumer = new EventingBasicConsumer(_channel);
+            var content = Encoding.UTF8.GetString(ea.Body.ToArray());
+            var message = JsonConvert.DeserializeObject<TMessage>(content);
 
-            consumer.Received += async (ch, ea) =>
+            try
             {
-                var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                var message = JsonConvert.DeserializeObject<TMessage>(content);
-
-                await HandleAsync(message!);
+                await HandleAsync(message);
 
                 _channel.BasicAck(ea.DeliveryTag, false);
-            };
-            _channel.BasicConsume(_settings.QueueName, false, consumer);
-            return Task.CompletedTask;
-        }
-        catch (Exception ex)
-        {
-            throw new CleanTemplateMessagingInternalException(
-                "CleanBaseRabbitMqSubscriber Exception: Something went wrong. Could not Subscribe RabbitMQ Message.",
-                CleanBaseExceptionCode.CleanBaseRabbitMqSubscriberException,
-                new CleanTemplateMessagingInternalException(
-                    ex.Message,
-                    CleanBaseExceptionCode.Exception));
-        }
+            }
+            catch (Exception ex)
+            {
+                RabbitMqExceptionHandling.HandleException(ex, this.GetType().Name, _settings, message);
+
+                await Task.Delay(500);
+
+                _channel.BasicNack(ea.DeliveryTag, false, true);
+            }
+        };
+        _channel.BasicConsume(_settings.QueueName, false, consumer);
+        return Task.CompletedTask;
     }
 
     protected abstract Task HandleAsync(TMessage message);

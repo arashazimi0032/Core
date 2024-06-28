@@ -3,10 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Caching</PackageId>
     <Title>CleanTemplate.Caching</Title>
-    <Version>8.0.1</Version>
+    <Version>8.0.2</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Caching</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Redis and Memory Caching.</Description>
@@ -14,7 +13,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Caching;Abstraction;Redis</PackageTags>
-    <PackageReleaseNotes>bug fix</PackageReleaseNotes>
+    <PackageReleaseNotes>- bug fix</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 

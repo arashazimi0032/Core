@@ -3,10 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Messaging</PackageId>
     <Title>CleanTemplate.Messaging</Title>
-    <Version>8.0.1</Version>
+    <Version>8.0.2</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Messaging</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Messaging between Microservices.</Description>
@@ -14,7 +13,8 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Abstraction;Contract;Messaging;RabbitMQ</PackageTags>
-    <PackageReleaseNotes>bug fix</PackageReleaseNotes>
+    <PackageReleaseNotes>- Global Exception Handling For RabbitMq Messages added
+- Bug fix and code cleanup</PackageReleaseNotes>
     <PackAsTool>False</PackAsTool>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>

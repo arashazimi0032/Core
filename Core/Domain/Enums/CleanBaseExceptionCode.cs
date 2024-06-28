@@ -26,6 +26,4 @@ public enum CleanBaseExceptionCode
     CleanGrpcClientFactoryException = 1005,
     CleanRabbitMqConnectionFactoryException = 1006,
     CleanBaseRabbitMqPublisherException = 1007,
-    CleanBaseRabbitMqSubscriberConfigurationException = 1008,
-    CleanBaseRabbitMqSubscriberException = 1009
 }

@@ -14,12 +14,12 @@ public abstract class CleanBaseException : SystemException, ICleanBaseException
     {
         _hasMessage = false;
     }
-    protected CleanBaseException(string? message)
+    protected CleanBaseException(string message)
         : base(message)
     {
         _hasMessage = true;
     }
-    protected CleanBaseException(string? message, Exception? innerException)
+    protected CleanBaseException(string message, Exception innerException)
         : base(message, innerException)
     {
         _hasMessage = true;
@@ -79,11 +79,11 @@ public abstract class CleanBaseException<TCode> : CleanBaseException, ICleanBase
     protected CleanBaseException()
     {
     }
-    protected CleanBaseException(string? message)
+    protected CleanBaseException(string message)
         : base(message)
     {
     }
-    protected CleanBaseException(string? message, Exception? innerException)
+    protected CleanBaseException(string message, Exception innerException)
         : base(message, innerException)
     {
     }

@@ -18,23 +18,23 @@ internal class CleanTemplateMessagingInternalException : CleanBaseException<Clea
         _internalExceptionCode = exceptionCode;
     }
 
-    internal CleanTemplateMessagingInternalException(string? message)
+    internal CleanTemplateMessagingInternalException(string message)
         : base(message)
     {
     }
 
-    internal CleanTemplateMessagingInternalException(string? message, CleanBaseExceptionCode exceptionCode)
+    internal CleanTemplateMessagingInternalException(string message, CleanBaseExceptionCode exceptionCode)
         : base(message)
     {
         _internalExceptionCode = exceptionCode;
     }
 
-    internal CleanTemplateMessagingInternalException(string? message, Exception? innerException)
+    internal CleanTemplateMessagingInternalException(string message, Exception innerException)
         : base(message, innerException)
     {
     }
 
-    internal CleanTemplateMessagingInternalException(string? message, CleanBaseExceptionCode exceptionCode, Exception? innerException)
+    internal CleanTemplateMessagingInternalException(string message, CleanBaseExceptionCode exceptionCode, Exception innerException)
         : base(message, innerException)
     {
         _internalExceptionCode = exceptionCode;

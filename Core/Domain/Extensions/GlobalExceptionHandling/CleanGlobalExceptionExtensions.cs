@@ -68,57 +68,18 @@ internal static class CleanGlobalExceptionExtensions
             $"\tHttpMethod: {errorModel.HttpMethod}\n" +
             $"\tExceptionType: {errorModel.ExceptionType}\n" +
             "\tCleanExceptionMessage: {\n" +
-            $"{GetNestedTypes(errorModel.CleanExceptionMessage)}\n" +
+            $"{MessageTemplateHelper.GetNestedTypes(errorModel.CleanExceptionMessage)}\n" +
             "\t}\n" +
             $"\tUnHandledExceptionMessage: {errorModel.UnHandledExceptionMessage}\n" +
             $"\tUserIpAddress: {errorModel.UserIpAddress}\n" +
             $"\tRequestUrl: {errorModel.RequestUrl}\n" +
             $"\tRequestBody: {errorModel.RequestBody}\n" +
             "\tRequestHeaders: {\n" +
-            $"{GetDictionaryString(errorModel.RequestHeaders)}\n" +
+            $"{MessageTemplateHelper.GetDictionaryString(errorModel.RequestHeaders)}\n" +
             "\t}\n" +
             "}";
 
         return toReturn;
     }
-
-    private static string GetNestedTypes(ExceptionMessage? exceptionMessage, int nestedLevel = 1)
-    {
-        var toReturn = "";
-        var tab = string.Concat(Enumerable.Repeat("\t", nestedLevel));
-        if (exceptionMessage is not null)
-        {
-            foreach (var property in exceptionMessage.GetType().GetProperties())
-            {
-                if (property.PropertyType.Equals(typeof(ExceptionMessage)))
-                {
-                    toReturn += $"\t{tab}{property.Name}: " + "{\n";
-                    toReturn += $"{GetNestedTypes((ExceptionMessage?)property.GetValue(exceptionMessage), nestedLevel + 1)}" +
-                        $"\t{tab}" + "}\n";
-                }
-                else
-                {
-                    toReturn += $"\t{tab}{property.Name}: {property.GetValue(exceptionMessage)}\n";
-                }
-            }
-        }
-        else
-        {
-            toReturn += $"\t{tab}null\n";
-        }
-
-        return toReturn;
-    }
-
-    private static string GetDictionaryString(Dictionary<string, string> dictionary)
-    {
-        var toReturn = "";
-
-        foreach (var key in dictionary.Keys)
-        {
-            toReturn += $"\t\t{key}: {dictionary[key]}\n";
-        }
-        return toReturn;
-    } 
     #endregion
 }

@@ -3,11 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>CleanTemplate</PackageId>
     <Title>CleanTemplate</Title>
-    <Version>8.0.1</Version>
+    <Version>8.0.2</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for initiating and structuring a .Net project.</Description>

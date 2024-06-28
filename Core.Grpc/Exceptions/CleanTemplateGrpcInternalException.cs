@@ -18,23 +18,23 @@ internal class CleanTemplateGrpcInternalException : CleanBaseException<CleanBase
         _internalExceptionCode = exceptionCode;
     }
 
-    internal CleanTemplateGrpcInternalException(string? message)
+    internal CleanTemplateGrpcInternalException(string message)
         : base(message)
     {
     }
 
-    internal CleanTemplateGrpcInternalException(string? message, CleanBaseExceptionCode exceptionCode)
+    internal CleanTemplateGrpcInternalException(string message, CleanBaseExceptionCode exceptionCode)
         : base(message)
     {
         _internalExceptionCode = exceptionCode;
     }
 
-    internal CleanTemplateGrpcInternalException(string? message, Exception? innerException)
+    internal CleanTemplateGrpcInternalException(string message, Exception innerException)
         : base(message, innerException)
     {
     }
 
-    internal CleanTemplateGrpcInternalException(string? message, CleanBaseExceptionCode exceptionCode, Exception? innerException)
+    internal CleanTemplateGrpcInternalException(string message, CleanBaseExceptionCode exceptionCode, Exception innerException)
         : base(message, innerException)
     {
         _internalExceptionCode = exceptionCode;

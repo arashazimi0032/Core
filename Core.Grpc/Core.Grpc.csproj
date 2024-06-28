@@ -3,10 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
     <PackageId>CleanTemplate.Grpc</PackageId>
     <Title>CleanTemplate.Grpc</Title>
-    <Version>8.0.1</Version>
+    <Version>8.0.2</Version>
     <Authors>arashazimi0032</Authors>
     <Product>CleanTemplate.Grpc</Product>
     <Description>A Clean Architecture Base Template comprising all Baseic and Abstract and Contract types for Grpc Communication.</Description>
@@ -14,7 +13,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/arashazimi0032/Core.git</RepositoryUrl>
     <PackageTags>CleanTemplate;CleanArchitecture;Grpc;Abstraction;ServiceModel;HTTP2</PackageTags>
-    <PackageReleaseNotes>bug fix</PackageReleaseNotes>
+    <PackageReleaseNotes>- bug fix and code cleanup</PackageReleaseNotes>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
