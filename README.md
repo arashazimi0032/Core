@@ -545,6 +545,8 @@ builder.AddCleanLogger(builder.Configuration["ElasticConfiguration:Uri"]);
 
 With above configurations, all error logs automatically records in Elasticsearch and you should see them in **Kibana** Dashboard.
 
+***Notable point***: To easier search in Elastic: All logg's **IndexFormats** starts with "cleanlogg".
+
 ***Notable point***: If you enabled security and authentication for your ElasticSearch, then you should pass your elastic username and password to ``AddCleanLogger()``.
 
 ## Settings
